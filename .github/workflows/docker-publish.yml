@@ -29,7 +29,7 @@ jobs:
       - name: Build and push Next.js image
         uses: docker/build-push-action@v5
         with:
-          context: ./lms-admin
+          context: .
           push: true
           tags: ghcr.io/${{ env.OWNER_LC }}/wea-admin:latest
           build-args: |
