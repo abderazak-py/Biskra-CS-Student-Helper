@@ -1,0 +1,18 @@
+{
+  "company": {
+    "name": "NeoTech Solutions",
+    "logo": "/assets/logo.png"
+  },
+  "theme": {
+    "colors": {
+      "primary": {
+        "type": "gradient",
+        "value": "#1E3A8A"
+      },
+      "secondary": "#F59E0B",
+      "neutral": "#374151",
+      "background": "#F9FAFB",
+      "text": "#111827"
+    }
+  }
+}
