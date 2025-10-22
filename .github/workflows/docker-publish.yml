@@ -33,4 +33,4 @@ jobs:
           push: true
           tags: ghcr.io/${{ env.OWNER_LC }}/wea-admin:latest
           build-args: |
-            NEXT_PUBLIC_API_URL="secrets.NEXT_PUBLIC_API_URL"
+            NEXT_PUBLIC_API_URL="https://wea-api-production.up.railway.app/"
