@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 export default function LoginAuth() {
 return (
     <div>
+
         <LoginForm />
     </div>
 )
