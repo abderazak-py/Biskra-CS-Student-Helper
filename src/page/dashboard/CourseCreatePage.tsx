@@ -28,6 +28,7 @@ import { LessonForm } from '@/components/courses/lessonsFrom';
 import { MultiSelect } from '@/components/ui/multi-select';
 import { groupService } from '@/service/api/group/groupService';
 import { factorService } from '@/service/api/factor/factorService';
+import {axiosClient} from "@/api/apiClient";
 
 // ------------ Interfaces ----------------
 interface TagRequest {
@@ -67,46 +68,47 @@ interface FormDataModel {
 
 // ---------------- API ----------------
 const createCourse = async (formData: FormDataModel) => {
-    const data = new FormData();
-    data.append('title', formData.title);
-    data.append('description', formData.description);
-    data.append('estimatedTime', formData.estimatedTime || '0');
+        const data = new FormData();
+        data.append('title', formData.title);
+        data.append('description', formData.description);
+        data.append('estimatedTime', formData.estimatedTime || '0');
 
-    if (formData.dueDate) {
-        const formattedDueDate = `${formData.dueDate}T00:00:00Z`;
-        data.append('dueDate', formattedDueDate);
-    }
-
-    formData.multiGroups.forEach((g) => data.append('groups', g));
-    formData.factors.forEach((f) => data.append('factors', f));
-    data.append('tags', JSON.stringify(formData.tags));
-
-    if (formData.thumbnail) data.append('thumbnail', formData.thumbnail);
-
-    formData.lessons.forEach((l) => {
-        let time = l.time;
-        if (/^\d{2}:\d{2}$/.test(time)) {
-            time = `${time}:00`;
+        if (formData.dueDate) {
+            const formattedDueDate = `${formData.dueDate}T00:00:00Z`;
+            data.append('dueDate', formattedDueDate);
         }
-        data.append('lessons', l.file);
-        data.append('lessonTimes',time);
-    });
 
-    // ✅ Append Questions as JSON string
-    data.append('questions', JSON.stringify(formData.questions));
-    console.log(...data)
-    const res = await fetch('http://localhost:8080/api/v1/courses', {
-        method: 'POST',
-        body: data,
-    });
+        // ✅ Append multiple values correctly
+        formData.multiGroups.forEach((g) => data.append('groups', g));
+        formData.factors.forEach((f) => data.append('factors', f));
+        data.append('tags', JSON.stringify(formData.tags));
 
-    if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(errorText || 'Failed to create course');
+        if (formData.thumbnail) data.append('thumbnail', formData.thumbnail);
+
+        formData.lessons.forEach((l) => {
+            let time = l.time;
+            if (/^\d{2}:\d{2}$/.test(time)) {
+                time = `${time}:00`;
+            }
+            data.append('lessons', l.file);
+            data.append('lessonTimes', time);
+        });
+
+        // ✅ Append Questions as JSON string
+        data.append('questions', JSON.stringify(formData.questions));
+
+        console.log([...data]);
+
+        // ✅ Correct Axios usage
+        const res = await axiosClient.post('/courses', data, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        return res.data;
     }
-
-    return res.json();
-};
+;
 
 // ------------ Component ----------------
 export default function CreateCoursePage() {
