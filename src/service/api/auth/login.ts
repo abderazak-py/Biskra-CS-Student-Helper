@@ -4,7 +4,7 @@ import axios, {AxiosError} from "axios";
 export const LoginAPI = {
     login: async ({email, password}: AuthenticationRequest): Promise<AuthenticationResponse> => {
         const {data} = await axios.post<AuthenticationResponse>(
-            process.env.NEXT_PUBLIC_API_URL+"auth/login",
+            "https://wea-api-production.up.railway.app/api/v1/auth/login",
             {email, password},
             {headers: {"Content-Type": "application/json"}}
         ).catch((error: AxiosError<{error?: string}>) => {
