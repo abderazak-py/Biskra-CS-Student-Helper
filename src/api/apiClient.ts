@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 
 
 const axiosClient = axios.create({
-    baseURL: "http://72.62.232.43:6060/api/v1/",
+    baseURL: "https://api.welledge.tech/api/v1/",
     timeout: 5000,
 });
 
