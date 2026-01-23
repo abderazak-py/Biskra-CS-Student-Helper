@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 
 
 const axiosClient = axios.create({
-    baseURL: "https://wea-api-production.up.railway.app/api/v1/",
+    baseURL: "http://72.62.232.43:6060/api/v1/",
     timeout: 5000,
 });
 
