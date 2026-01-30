@@ -9,7 +9,7 @@ A Progressive Web App for calculating semester averages for Computer Science stu
 - 💾 **Data Persistence** - Your grades are saved locally
 - 🎨 **Dark/Light Theme** - Toggle between themes
 - 📊 **Semester Calculators** - S1 through S6 with proper module coefficients
-- 
+  
 ## 🔒 Security & Privacy
 
 - All data stored locally on device
