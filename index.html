@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Biskra CS Student Helper – All Year</title>
     <link rel="icon" href="icon.png">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
@@ -478,8 +478,17 @@
 
 
     </div>
-
-    <script src="./app.js" defer></script>
+    <script src="sw.js"></script>
+    <script src="./app.js" defer>
+        if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+        navigator.serviceWorker
+        .register("./sw.js")
+        .then(reg => console.log("Service Worker registered", reg))
+        .catch(err => console.error("Service Worker failed", err));
+    });
+  }
+    </script>
 </body>
 
 </html>
