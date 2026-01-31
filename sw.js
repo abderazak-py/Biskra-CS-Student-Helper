@@ -1,5 +1,12 @@
 const CACHE = "biskra-cs-v8";
-const ASSETS = ["./", "./index.html", "./style.css", "./app.js", "./manifest.json"];
+const ASSETS = ["./",
+  "./index.html",
+  "./style.css",
+  "./app.js",
+  "./manifest.json",
+  "./icon.png",
+  "./icon-192.png",
+  "./icon-512.png",];
 
 
 self.addEventListener("install", (event) => {
