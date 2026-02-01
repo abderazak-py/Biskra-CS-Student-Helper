@@ -1,12 +1,13 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-    eslint: {
-        ignoreDuringBuilds: true,
-    },
-    env: {
-        NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-    },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://api.welledge.tech/api/v1/:path*', // proxy to backend API
+      },
+    ];
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

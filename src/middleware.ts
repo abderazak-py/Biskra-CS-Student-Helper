@@ -2,11 +2,22 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
+    // ✅ Allow preflight requests (CRITICAL)
+    if (req.method === "OPTIONS") {
+        return NextResponse.next();
+    }
+
     const token = req.cookies.get("token")?.value;
     const { pathname } = req.nextUrl;
 
+    // ✅ Ignore API routes completely
+    if (pathname.startsWith("/api")) {
+        return NextResponse.next();
+    }
+
     const isLoginRoute = pathname.startsWith("/auth/login");
     const isDashboardRoute = pathname.startsWith("/dashboard");
+
     if (!token && !isLoginRoute) {
         return NextResponse.redirect(new URL("/auth/login", req.url));
     }
@@ -23,5 +34,7 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+    matcher: [
+        "/((?!_next/static|_next/image|favicon.ico).*)",
+    ],
 };

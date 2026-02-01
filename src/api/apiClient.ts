@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 
-
 const axiosClient = axios.create({
     baseURL: "https://api.welledge.tech/api/v1/",
     timeout: 5000,
