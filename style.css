@@ -703,3 +703,79 @@ body.light .toggleRow .chkBox {
     margin: 0 0 10px;
     text-align: right
 }
+
+/* =========================
+   QUIZ styles
+   ========================= */
+
+.quizTop {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.quizQ {
+    margin-bottom: 12px;
+}
+
+.quizQuestion {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: .2px;
+    margin-top: 4px;
+}
+
+.quizOptions {
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.quizOptionBtn {
+    text-align: left;
+    width: 100%;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--text);
+    padding: 12px 12px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 800;
+    transition: transform var(--t-fast), background var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.quizOptionBtn:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+    box-shadow: var(--shadow-hover);
+}
+
+.quizOptionBtn:active {
+    transform: translateY(0);
+}
+
+.quizOptionBtn[disabled] {
+    cursor: not-allowed;
+    opacity: .9;
+}
+
+.quizOptionBtn.correct {
+    border-color: color-mix(in srgb, var(--good) 75%, var(--line));
+    background: color-mix(in srgb, var(--good) 22%, var(--surface-2));
+}
+
+.quizOptionBtn.wrong {
+    border-color: color-mix(in srgb, var(--bad) 75%, var(--line));
+    background: color-mix(in srgb, var(--bad) 18%, var(--surface-2));
+}
+
+.quizOptionBtn.reveal {
+    border-color: color-mix(in srgb, var(--good) 55%, var(--line));
+    background: color-mix(in srgb, var(--good) 14%, var(--surface-2));
+}
+
+.quizFeedback {
+    margin-top: 12px;
+    line-height: 1.45;
+}
