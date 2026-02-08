@@ -2,7 +2,7 @@
  * The cache name for the service worker.
  * @type {string}
  */
-const CACHE = "biskra-cs-v15";
+const CACHE = "biskra-cs-v17";
 
 /**
  * The assets to be cached by the service worker.
@@ -13,7 +13,54 @@ const ASSETS = ["./",
   "./style.css",
   "./app.js",
   "./manifest.json",
-  "./icon.png",];
+  "./icon.png",
+  "./adkar.js",
+  "./calculator.js",
+  "./habits.js",
+  "./modules.js",
+  "./persistence.js",
+  "./pomodoro.js",
+  "./quiz.js",
+  "./router.js",
+  "./theme.js",
+  "./ui.js",
+  "./docs/adkar.js.html",
+  "./docs/calculator.js.html",
+  "./docs/global.html",
+  "./docs/habits.js.html",
+  "./docs/index.html",
+  "./docs/modules.js.html",
+  "./docs/persistence.js.html",
+  "./docs/pomodoro.js.html",
+  "./docs/quiz.js.html",
+  "./docs/router.js.html",
+  "./docs/sw.js.html",
+  "./docs/theme.js.html",
+  "./docs/ui.js.html",
+  "./docs/fonts/OpenSans-Bold-webfont.eot",
+  "./docs/fonts/OpenSans-Bold-webfont.svg",
+  "./docs/fonts/OpenSans-Bold-webfont.woff",
+  "./docs/fonts/OpenSans-BoldItalic-webfont.eot",
+  "./docs/fonts/OpenSans-BoldItalic-webfont.svg",
+  "./docs/fonts/OpenSans-BoldItalic-webfont.woff",
+  "./docs/fonts/OpenSans-Italic-webfont.eot",
+  "./docs/fonts/OpenSans-Italic-webfont.svg",
+  "./docs/fonts/OpenSans-Italic-webfont.woff",
+  "./docs/fonts/OpenSans-Light-webfont.eot",
+  "./docs/fonts/OpenSans-Light-webfont.svg",
+  "./docs/fonts/OpenSans-Light-webfont.woff",
+  "./docs/fonts/OpenSans-LightItalic-webfont.eot",
+  "./docs/fonts/OpenSans-LightItalic-webfont.svg",
+  "./docs/fonts/OpenSans-LightItalic-webfont.woff",
+  "./docs/fonts/OpenSans-Regular-webfont.eot",
+  "./docs/fonts/OpenSans-Regular-webfont.svg",
+  "./docs/fonts/OpenSans-Regular-webfont.woff",
+  "./docs/scripts/linenumber.js",
+  "./docs/scripts/prettify/lang-css.js",
+  "./docs/scripts/prettify/prettify.js",
+  "./docs/styles/jsdoc-default.css",
+  "./docs/styles/prettify-jsdoc.css",
+  "./docs/styles/prettify-tomorrow.css",];
 
 
 /**
