@@ -22,11 +22,11 @@ const QUIZ_QUESTIONS = [
         exp: "OOP is a real paradigm; the others are jokes.",
     },
     {
-        cat: "Funny!",
+        cat: "Fun",
         q: "Who is the best female programmer?",
         options: ["Ada Lovelace", "Ibtihal", "Grace Hopper"],
-        answer: 2,
-        exp: "Bcz she just a Girl <3.",
+        answer: 1,
+        exp: "Because she made the first pull request.",
     },
     {
         cat: "Data Structures",
