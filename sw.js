@@ -2,7 +2,7 @@
  * The cache name for the service worker.
  * @type {string}
  */
-const CACHE = "biskra-cs-v19";
+const CACHE = "biskra-cs-v20";
 
 /**
  * The assets to be cached by the service worker.
