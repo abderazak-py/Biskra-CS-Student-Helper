@@ -102,8 +102,10 @@ This project is free to use for all Biskra University CS students. For more deta
 
 This project was made possible by:
 
-*   **Abderrazak Achour** - [GitHub](https://github.com/abderazak-py/)
+*   **Abderazak Achour** - [GitHub](https://github.com/abderazak-py/)
 *   **Farhat** - [GitHub](https://github.com/Farhat-141)
+*   **Taha** - [GitHub](https://github.com/t1mtr9)
+*   **Ibtihal** - [GitHub](https://github.com/ibtihal0666)
 
 ---
 

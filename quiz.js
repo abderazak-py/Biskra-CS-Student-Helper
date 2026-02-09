@@ -375,7 +375,7 @@ const QUIZ_QUESTIONS = [
         cat: "Fun",
         q: "Who is the best admin in cs dep ?",
         options: ["Taha abdchafi Metir", "chef dep", "Choumeissa kadi"],
-        answer: 0
+        answer: 0,
         exp: "Because he did a lot for the students of the department.",
     },
 ];
