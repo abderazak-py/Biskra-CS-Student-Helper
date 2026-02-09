@@ -371,6 +371,13 @@ const QUIZ_QUESTIONS = [
         answer: 1,
         exp: "The CPU performs most calculations, so it’s nicknamed the brain.",
     },
+    {
+        cat: "Fun",
+        q: "Who is the best admin in cs dep ?",
+        options: ["Taha abdchafi Metir", "chef dep", "Choumeissa kadi"],
+        answer: 0
+        exp: "Because he did a lot for the students of the department.",
+    },
 ];
 
 /**
