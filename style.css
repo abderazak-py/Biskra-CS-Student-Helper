@@ -28,10 +28,10 @@
     --chip-bg: rgba(255, 255, 255, .06);
 
     --contribution-level-0: rgba(255, 255, 255, 0.05);
-    --contribution-level-1: rgba(63, 128, 254, 0.3);
-    --contribution-level-2: rgba(63, 128, 254, 0.5);
-    --contribution-level-3: rgba(63, 128, 254, 0.8);
-    --contribution-level-4: rgba(63, 128, 254, 1);
+    --contribution-level-1: color-mix(in srgb, var(--accent) 40%, transparent);
+    --contribution-level-2: color-mix(in srgb, var(--accent) 60%, transparent);
+    --contribution-level-3: color-mix(in srgb, var(--accent) 85%, transparent);
+    --contribution-level-4: var(--accent);
 }
 
 body.light {
@@ -52,10 +52,10 @@ body.light {
     --input-bg: rgba(11, 18, 32, .03);
 
     --contribution-level-0: rgba(255, 255, 255, .05);
-    --contribution-level-1: rgba(110, 168, 254, .22);
-    --contribution-level-2: rgba(110, 168, 254, .40);
-    --contribution-level-3: rgba(110, 168, 254, .62);
-    --contribution-level-4: rgba(110, 168, 254, .90);
+    --contribution-level-1: color-mix(in srgb, var(--accent) 30%, transparent);
+    --contribution-level-2: color-mix(in srgb, var(--accent) 50%, transparent);
+    --contribution-level-3: color-mix(in srgb, var(--accent) 75%, transparent);
+    --contribution-level-4: var(--accent);
 }
 
 * {
@@ -97,11 +97,83 @@ body.light {
     filter: brightness(1.08);
 }
 
+.themePopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 320px;
+    z-index: 1001;
+    border-radius: 20px;
+}
+
+.themeOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+}
+
+.themeOptions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.themeOption {
+    width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--text);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.themeOption.active {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 20%, var(--surface-2));
+}
+
 body {
     margin: 0;
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, Apple Color Emoji, Segoe UI Emoji;
-    background: radial-gradient(1200px 800px at 20% 0%, var(--card) 0%, var(--bg) 55%) fixed;
+    background: radial-gradient(1200px 800px at 20% 0%, color-mix(in srgb, var(--accent) 8%, var(--card)) 0%, var(--bg) 75%) fixed;
     color: var(--text);
+}
+
+/* Orange Theme */
+body.theme-orange {
+    --accent: #f97316;
+}
+
+body.light.theme-orange {
+    --accent: #ea580c;
+}
+
+/* Red Theme */
+body.theme-red {
+    --accent: #ef4444;
+}
+
+body.light.theme-red {
+    --accent: #dc2626;
+}
+
+/* Pink Theme */
+body.theme-pink {
+    --accent: #ec4899;
+}
+
+body.light.theme-pink {
+    --accent: #db2777;
 }
 
 .wrap {
@@ -113,7 +185,6 @@ body {
 header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 14px;
     flex-wrap: wrap;
     margin-bottom: 18px
@@ -124,6 +195,15 @@ header {
     align-items: baseline;
     gap: 10px;
     flex-wrap: wrap
+}
+
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: auto;
 }
 
 .brand h1 {
@@ -223,17 +303,61 @@ body.light .themeIcon .moon {
     transform: rotate(0) scale(1)
 }
 
-@media (prefers-reduced-motion:reduce) {
+/* Orange Theme */
+body.theme-orange {
+    --accent: #ff8c00; /* Darker Orange */
+    --bg: #2a1d0a;
+    --card: #4d310d;
+    --text: #fff0d8;
+    --muted: #e5c8a0;
+    --line: rgba(255, 140, 0, .2);
+}
 
-    .mode,
-    .themeIcon .sun,
-    .themeIcon .moon,
-    button,
-    .homeBtn,
-    .iconLink,
-    .toggleRow .chkBox {
-        transition: none !important
-    }
+body.light.theme-orange {
+    --accent: #d97706; /* Bolder Orange */
+    --bg: #fffaf0;
+    --card: #ffffff;
+    --text: #653b05;
+    --muted: #a17c4a;
+    --line: rgba(217, 119, 6, .2);
+}
+
+/* Red Theme */
+body.theme-red {
+    --accent: #ff4d4d; /* Brighter Red */
+    --bg: #2a0f0f;
+    --card: #4d1313;
+    --text: #ffdddd;
+    --muted: #e5a0a0;
+    --line: rgba(255, 77, 77, .2);
+}
+
+body.light.theme-red {
+    --accent: #c53030; /* Bolder Red */
+    --bg: #fff5f5;
+    --card: #ffffff;
+    --text: #650c0c;
+    --muted: #a14a4a;
+    --line: rgba(197, 48, 48, .2);
+}
+
+/* Pink Theme */
+body.theme-pink {
+    --accent: #ff77a9; /* Brighter Pink */
+    --bg: #2a0f1b;
+    --card: #4d1330;
+    --text: #ffdde9;
+    --muted: #e5a0c7;
+    --line: rgba(255, 119, 169, .2);
+}
+
+body.light.theme-pink {
+    --accent: #d53f8c; /* Bolder Pink */
+    --bg: #fff5f9;
+    --card: #ffffff;
+    --text: #650c3f;
+    --muted: #a14a7e;
+    --line: rgba(213, 63, 140, .2);
 }
 
 .grid {
@@ -249,7 +373,7 @@ body.light .themeIcon .moon {
 }
 
 .card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .03));
+    background: var(--card);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -257,7 +381,7 @@ body.light .themeIcon .moon {
 }
 
 body.light .card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, .92), rgba(255, 255, 255, .78))
+    background: var(--card);
 }
 
 .card .hd {
@@ -272,7 +396,7 @@ body.light .card {
 }
 
 body.light .card .hd {
-    background: rgba(37, 99, 235, .06)
+    background: color-mix(in srgb, var(--accent) 10%, transparent)
 }
 
 .card .hd .h {
@@ -410,7 +534,7 @@ select {
 
 button {
     border: 1px solid var(--line);
-    background: rgba(110, 168, 254, .15);
+    background: color-mix(in srgb, var(--accent) 25%, transparent);
     color: var(--text);
     padding: 10px 12px;
     border-radius: 12px;
@@ -424,9 +548,9 @@ button.secondary {
 
 button:hover {
     transform: translateY(-1px);
-    border-color: rgba(110, 168, 254, .40);
+    border-color: color-mix(in srgb, var(--accent) 60%, transparent);
     box-shadow: var(--shadow-hover);
-    background: rgba(110, 168, 254, .22)
+    background: color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 button:active {
@@ -549,8 +673,8 @@ button:active {
 
 .homeBtn:hover {
     transform: translateY(-2px);
-    border-color: rgba(110, 168, 254, .45);
-    background: rgba(110, 168, 254, .12);
+    border-color: color-mix(in srgb, var(--accent) 65%, transparent);
+    background: color-mix(in srgb, var(--accent) 25%, transparent);
     box-shadow: var(--shadow-lg)
 }
 
@@ -722,8 +846,8 @@ body.light .toggleRow .chkBox {
 
 .iconLink:hover {
     transform: translateY(-1px);
-    border-color: rgba(110, 168, 254, .45);
-    background: rgba(110, 168, 254, .14);
+    border-color: color-mix(in srgb, var(--accent) 65%, transparent);
+    background: color-mix(in srgb, var(--accent) 28%, transparent);
     box-shadow: var(--shadow-hover)
 }
 
