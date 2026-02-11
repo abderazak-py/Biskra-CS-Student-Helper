@@ -1321,3 +1321,165 @@ body.light .toggleRow .chkBox {
     justify-content: flex-end;
     margin-top: 15px;
 }
+
+/* Study Resources Page */
+.semester-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.accordion-item {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: var(--surface-2);
+    border: none;
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--t-fast);
+}
+
+.accordion-header:hover {
+    background: color-mix(in srgb, var(--accent) 15%, var(--surface-2));
+}
+
+.arrow {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.arrow.rotate {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: var(--card);
+}
+
+.accordion-content.active {
+    max-height: 1000px; /* Adjust as needed */
+}
+
+.module-card {
+    border-top: 1px solid var(--line);
+}
+
+.module-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: var(--surface-1);
+    border: none;
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--t-fast);
+}
+
+.module-header:hover {
+    background: color-mix(in srgb, var(--accent) 10%, var(--surface-1));
+}
+
+.module-content {
+    padding: 0 16px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.module-content.active {
+    max-height: 2000px; /* Increased to accommodate nested accordions */
+    padding: 10px 16px 16px;
+}
+
+.resource-section {
+    margin-top: 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface-1);
+}
+
+.resource-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--t-fast);
+    text-align: left;
+}
+
+.resource-header:hover {
+    background: color-mix(in srgb, var(--accent) 10%, var(--surface-1));
+}
+
+.resource-links {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 14px;
+}
+
+.resource-links.active {
+    max-height: 300px;
+    padding: 10px 14px 14px;
+}
+
+.resource-link {
+    display: block;
+    padding: 10px 12px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 8px;
+    transition: all var(--t-fast);
+}
+
+.resource-link:hover {
+    background: color-mix(in srgb, var(--accent) 15%, var(--surface-1));
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+    transform: translateY(-1px);
+}
+
+.resource-link:active {
+    transform: translateY(0);
+}
+
+.no-resources {
+    padding: 10px 12px;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+}

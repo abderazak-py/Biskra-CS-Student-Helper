@@ -19,7 +19,7 @@ function setActivePage(key) {
 function currentRoute() {
     const key = (location.hash || "#home").replace("#", "");
     // FIX: add "habits" to known static pages (your HTML has id="pagehabits")
-    const staticPages = ["home", "calc", "pomodoro", "adkar", "quiz", "habits", "flashcards"];
+    const staticPages = ["home", "calc", "pomodoro", "adkar", "quiz", "habits", "flashcards", "resources"];
     if (staticPages.includes(key)) return key;
     return SEMESTERS.some((s) => s.key === key) ? key : "home";
 }
@@ -46,6 +46,9 @@ function initPages() {
         });
         document.getElementById("btnHome" + semKey).addEventListener("click", () => (location.hash = "#home"));
     }
+
+    // Initialize the resources page
+    initResourcesPage();
 }
 
 /**
