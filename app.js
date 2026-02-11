@@ -10,3 +10,5 @@ wireNotesPersistence();
 wirePomodoro();
 // Wire up the quiz functionality.
 wireQuiz();
+// Wire up the flashcards functionality.
+initFlashcards();

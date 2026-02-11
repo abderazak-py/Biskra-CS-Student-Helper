@@ -19,7 +19,7 @@ function setActivePage(key) {
 function currentRoute() {
     const key = (location.hash || "#home").replace("#", "");
     // FIX: add "habits" to known static pages (your HTML has id="pagehabits")
-    const staticPages = ["home", "calc", "pomodoro", "adkar", "quiz", "habits"];
+    const staticPages = ["home", "calc", "pomodoro", "adkar", "quiz", "habits", "flashcards"];
     if (staticPages.includes(key)) return key;
     return SEMESTERS.some((s) => s.key === key) ? key : "home";
 }

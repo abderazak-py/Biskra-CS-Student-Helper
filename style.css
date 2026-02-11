@@ -305,7 +305,8 @@ body.light .themeIcon .moon {
 
 /* Orange Theme */
 body.theme-orange {
-    --accent: #ff8c00; /* Darker Orange */
+    --accent: #ff8c00;
+    /* Darker Orange */
     --bg: #2a1d0a;
     --card: #4d310d;
     --text: #fff0d8;
@@ -314,7 +315,8 @@ body.theme-orange {
 }
 
 body.light.theme-orange {
-    --accent: #d97706; /* Bolder Orange */
+    --accent: #d97706;
+    /* Bolder Orange */
     --bg: #fffaf0;
     --card: #ffffff;
     --text: #653b05;
@@ -324,7 +326,8 @@ body.light.theme-orange {
 
 /* Red Theme */
 body.theme-red {
-    --accent: #ff4d4d; /* Brighter Red */
+    --accent: #ff4d4d;
+    /* Brighter Red */
     --bg: #2a0f0f;
     --card: #4d1313;
     --text: #ffdddd;
@@ -333,7 +336,8 @@ body.theme-red {
 }
 
 body.light.theme-red {
-    --accent: #c53030; /* Bolder Red */
+    --accent: #c53030;
+    /* Bolder Red */
     --bg: #fff5f5;
     --card: #ffffff;
     --text: #650c0c;
@@ -343,7 +347,8 @@ body.light.theme-red {
 
 /* Pink Theme */
 body.theme-pink {
-    --accent: #ff77a9; /* Brighter Pink */
+    --accent: #ff77a9;
+    /* Brighter Pink */
     --bg: #2a0f1b;
     --card: #4d1330;
     --text: #ffdde9;
@@ -352,7 +357,8 @@ body.theme-pink {
 }
 
 body.light.theme-pink {
-    --accent: #d53f8c; /* Bolder Pink */
+    --accent: #d53f8c;
+    /* Bolder Pink */
     --bg: #fff5f9;
     --card: #ffffff;
     --text: #650c3f;
@@ -488,6 +494,10 @@ body.light .card .hd {
     grid-template-columns: repeat(2, 1fr)
 }
 
+.row.one {
+    grid-template-columns: 1fr;
+}
+
 /* .row.three removed (same as base) */
 
 label {
@@ -498,10 +508,11 @@ label {
 }
 
 input[type="number"],
+input[type="text"],
+textarea,
 select {
     width: 100%;
     padding: 10px;
-    height: 44px;
     border-radius: 14px;
     border: 1px solid var(--line);
     background: var(--input-bg);
@@ -510,19 +521,60 @@ select {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
 }
 
+input[type="number"],
+input[type="text"],
+select {
+    height: 44px;
+}
+
+textarea {
+    resize: none;
+    min-height: 80px;
+}
+
+
 input[type="number"]::placeholder {
     color: rgba(231, 238, 252, .35)
 }
 
 select {
     -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
-    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
-    background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
-    background-size: 6px 6px;
+    background-image:
+        radial-gradient(ellipse at center, currentColor 30%, transparent 30%),
+        linear-gradient(to bottom, transparent 40%, currentColor 40%, currentColor 60%, transparent 60%);
+    background-position: calc(100% - 12px) 50%;
+    background-size: 6px 6px, 12px 16px;
     background-repeat: no-repeat;
+    background-color: var(--input-bg);
+    color: var(--text);
+    padding: 10px;
     padding-right: 34px;
     cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    outline: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
+    width: 100%;
+    font-size: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+select:focus {
+    border-color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+select option {
+    background: var(--card);
+    color: var(--text);
+    padding: 8px;
+}
+
+select option:checked {
+    background: var(--accent) !important;
+    color: white !important;
 }
 
 .actions {
@@ -985,9 +1037,287 @@ body.light .toggleRow .chkBox {
 }
 
 @media (min-width: 768px) {
-  #habitsContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
+    #habitsContainer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+}
+
+/* =========================
+   FLASHCARDS styles
+   ========================= */
+
+.flashcards-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+}
+
+.tab-link {
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+.tab-link.active {
+    color: var(--text);
+    background: var(--surface-1);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.study-card {
+    min-height: 150px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--input-bg);
+    margin: 16px 0;
+}
+
+.study-card .front {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.study-card .back {
+    font-size: 16px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+}
+
+.rate-card.again {
+    background-color: var(--bad);
+}
+
+.rate-card.hard {
+    background-color: var(--warn);
+    color: #000;
+}
+
+.rate-card.success {
+    background-color: var(--good);
+}
+
+.rate-card.good {
+    background-color: var(--accent);
+}
+
+/* ---------------------------
+   Custom Select (Modern)
+   Works with hidden native <select>
+---------------------------- */
+
+.customSelect {
+    position: relative;
+    width: 100%;
+}
+
+.customSelect select {
+    /* keep in DOM for value + forms, but hide visually */
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.customSelectBtn {
+    width: 100%;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--input-bg);
+    color: var(--text);
+    cursor: pointer;
+
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
+    transition: transform var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast), background var(--t-fast);
+}
+
+.customSelectBtn:hover {
+    transform: translateY(-1px);
+    border-color: color-mixin(srgb, var(--accent) 55%, var(--line));
+    box-shadow: var(--shadow-hover);
+    background: color-mixin(srgb, var(--accent) 10%, var(--input-bg));
+}
+
+.customSelectBtn:focus-visible {
+    outline: 3px solid color-mixin(srgb, var(--accent) 45%, transparent);
+    outline-offset: 3px;
+}
+
+.customSelectValue {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 650;
+}
+
+.customSelectChevron {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
+    opacity: .9;
+    transition: transform var(--t-fast);
+}
+
+.customSelect.open .customSelectChevron {
+    transform: rotate(180deg);
+}
+
+.customSelectMenu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    z-index: 40;
+
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    box-shadow: var(--shadow-lg);
+
+    padding: 6px;
+    max-height: 260px;
+    overflow: auto;
+
+    display: none;
+}
+
+.customSelect.open .customSelectMenu {
+    display: block;
+}
+
+.customSelectOption {
+    width: 100%;
+    text-align: left;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text);
+    border-radius: 12px;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-weight: 650;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    transition: transform var(--t-fast), background var(--t-fast), border-color var(--t-fast);
+}
+
+.customSelectOption:last-child {
+    margin-bottom: 0;
+}
+
+.customSelectOption:hover {
+    transform: translateY(-1px);
+    background: color-mixin(srgb, var(--accent) 14%, transparent);
+    border-color: color-mixin(srgb, var(--accent) 30%, transparent);
+}
+
+.customSelectOption[aria-selected="true"] {
+    background: color-mixin(srgb, var(--accent) 20%, transparent);
+    border-color: color-mixin(srgb, var(--accent) 45%, transparent);
+}
+
+.customSelectHint {
+    color: var(--muted);
+    font-weight: 650;
+    font-size: 12px;
+    padding: 8px 10px 2px;
+}
+
+.customSelectEmpty {
+    color: var(--muted);
+    padding: 10px;
+    font-size: 13px;
+}
+
+/* Optional: make it match your table/module spacing */
+.customSelectWrap {
+    margin-top: 0;
+}
+
+/* Fix dropdown clipping inside flashcards card */
+#pageflashcards .card {
+    overflow: visible;
+}
+
+/* If you still need header corners clipped, keep only X clipping */
+#pageflashcards .card {
+    overflow-x: visible;
+    overflow-y: visible;
+}
+
+/* Custom Delete Confirmation Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-dialog {
+    width: 100%;
+    max-width: 500px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-dialog .bd {
+    padding: 20px;
+}
+
+.modal-dialog .bd p {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--text);
+}
+
+.modal-dialog .actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 15px;
 }
