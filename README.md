@@ -4,9 +4,6 @@
   <p align="center">
     A Progressive Web App (PWA) designed to assist Computer Science students at the University of Biskra with their academic needs.
     <br />
-    <a href="./docs/index.html"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
     <a href="https://github.com/abderazak-py/Biskra-CS-Student-Helper/issues">Report Bug</a>
     ·
     <a href="https://github.com/abderazak-py/Biskra-CS-Student-Helper/issues">Request Feature</a>
@@ -66,15 +63,7 @@ The application is designed to be intuitive and easy to use. Upon opening, you w
 
 To install the app, look for the "Install" button in your browser's address bar or menu.
 
----
 
-## 📚 Documentation
-
-The codebase is thoroughly documented using JSDoc. This provides a clear overview of the code structure, functions, and variables, making it easier for new contributors to get involved.
-
-You can browse the full documentation here: **[Code Documentation](./docs/index.html)**
-
----
 
 ## 🤝 Contributing
 
