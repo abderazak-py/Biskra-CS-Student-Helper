@@ -29,6 +29,7 @@ This project is a comprehensive toolkit for Computer Science students at Biskra 
 *   🎯 **Habit Tracker**: A simple yet effective tool to build and track daily habits.
 *   ❓ **CS Quiz**: Test your knowledge with a fun quiz covering various computer science topics.
 *   📿 **Adkar Counter**: A digital counter for daily Adkar.
+*   📖 **Khetma Helper**: Plan and track your Quran completion with customizable schedules.
 
 ---
 
@@ -60,6 +61,7 @@ The application is designed to be intuitive and easy to use. Upon opening, you w
 *   **Habit Tracker**: Add your habits and mark them as complete each day.
 *   **Quiz**: Choose a category and test your knowledge.
 *   **Adkar**: Use the counter for your daily remembrances.
+*   **Khetma Helper**: Create and track multiple Quran completion plans (khetmas) with customizable schedules.
 
 To install the app, look for the "Install" button in your browser's address bar or menu.
 

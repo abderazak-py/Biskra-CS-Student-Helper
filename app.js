@@ -12,3 +12,5 @@ wirePomodoro();
 wireQuiz();
 // Wire up the flashcards functionality.
 initFlashcards();
+// Initialize the Khetma Helper functionality.
+initKhetmaHelper();
