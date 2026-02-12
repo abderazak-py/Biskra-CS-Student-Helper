@@ -1,0 +1,28 @@
+{
+  "name": "biskra-cs-student-helper",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">   <img src=\"icon.png\" alt=\"Biskra CS Student Helper Logo\" width=\"128\">   <h1 align=\"center\">Biskra CS Student Helper</h1>   <p align=\"center\">     A Progressive Web App (PWA) designed to assist Computer Science students at the University of Biskra with their academic needs.     <br />     <a href=\"https://github.com/abderazak-py/Biskra-CS-Student-Helper/issues\">Report Bug</a>     ·     <a href=\"https://github.com/abderazak-py/Biskra-CS-Student-Helper/issues\">Request Feature</a>   </p> </p>",
+  "main": "adkar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "node start-live-server.js",
+    "live": "live-server --port=8080 --host=localhost --open=/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abderazak-py/Biskra-CS-Student-Helper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/abderazak-py/Biskra-CS-Student-Helper/issues"
+  },
+  "homepage": "https://github.com/abderazak-py/Biskra-CS-Student-Helper#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "live-server": "^1.2.0"
+  }
+}

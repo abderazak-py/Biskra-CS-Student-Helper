@@ -1,5 +1,5 @@
 
-const CACHE = "biskra-cs-v29";
+const CACHE = "biskra-cs-v30";
 
 const ASSETS = [
   "/",
@@ -13,6 +13,7 @@ const ASSETS = [
   "/calculator.js",
   "/flashcards.js",
   "/habits.js",
+  "/khetma.js",
   "/modules.js",
   "/persistence.js",
   "/pomodoro.js",
