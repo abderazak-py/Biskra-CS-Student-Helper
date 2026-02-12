@@ -1,5 +1,5 @@
 
-const CACHE = "biskra-cs-v28";
+const CACHE = "biskra-cs-v29";
 
 const ASSETS = [
   "/",
@@ -20,7 +20,8 @@ const ASSETS = [
   "/router.js",
   "/theme.js",
   "/ui.js",
-  "resources.js",
+  "/resources.js",
+  "/teachers.js",
 ];
 
 self.addEventListener("install", (event) => {

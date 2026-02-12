@@ -19,7 +19,7 @@ function setActivePage(key) {
 function currentRoute() {
     const key = (location.hash || "#home").replace("#", "");
     // FIX: add "habits" to known static pages (your HTML has id="pagehabits")
-    const staticPages = ["home", "calc", "pomodoro", "adkar", "quiz", "habits", "flashcards", "resources", "khetma"];
+    const staticPages = ["home", "calc", "pomodoro", "adkar", "quiz", "habits", "flashcards", "resources", "khetma", "teachers"];
     if (staticPages.includes(key)) return key;
     return SEMESTERS.some((s) => s.key === key) ? key : "home";
 }
@@ -55,7 +55,15 @@ function initPages() {
  * Initializes the router.
  */
 function initRouter() {
-    const apply = () => setActivePage(currentRoute());
+    const apply = () => {
+        const route = currentRoute();
+        setActivePage(route);
+        
+        // Initialize teachers page when navigating to it
+        if (route === 'teachers') {
+            initTeachersPage();
+        }
+    };
     window.addEventListener("hashchange", apply);
     apply();
 }

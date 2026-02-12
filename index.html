@@ -251,6 +251,25 @@
                     <div class="go">Open</div>
                 </a>
 
+                <a class="homeBtn" href="#teachers">
+                    <div class="homeBtnLeft">
+                        <div class="homeIcon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="t">Contact Teachers</div>
+                            <div class="d">View and copy teacher email addresses.</div>
+                        </div>
+                    </div>
+                    <div class="go">Open</div>
+                </a>
+
             </div>
         </section>
 
@@ -624,6 +643,24 @@
         <section class="page" id="pages4"></section>
         <section class="page" id="pages5"></section>
         <section class="page" id="pages6"></section>
+        
+        <!-- TEACHERS CONTACT PAGE -->
+        <section class="page" id="pageteachers">
+            <div class="card">
+                <div class="hd">
+                    <div class="h">Contact Teachers</div>
+                    <a href="#home" class="homeBtn"
+                        style="display: inline-flex; padding: 8px 12px; font-size: 13px; text-decoration: none;">
+                        ← Home
+                    </a>
+                </div>
+                <div class="bd">
+                    <div class="teacher-list" id="teacherList">
+                        <!-- Teacher contacts will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <footer class="footer">
@@ -663,6 +700,7 @@
     <script src="flashcards.js" defer></script>
     <script src="khetma.js" defer></script>
     <script src="app.js" defer></script>
+    <script src="teachers.js" defer></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

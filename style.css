@@ -1754,7 +1754,8 @@ body.light .toggleRow .chkBox {
     padding: 6px 10px;
     font-size: 0.85em;
     margin: 0 3px;
-    border-radius: 12px; /* Increased border radius for more rounded appearance */
+    border-radius: 12px;
+    /* Increased border radius for more rounded appearance */
 }
 
 .btn-success {
@@ -1882,4 +1883,108 @@ body.light .toggleRow .chkBox {
     border-top: 1px solid var(--line);
     background-color: var(--surface-2);
     margin-top: 0;
+}
+
+/* Teachers Page Styling */
+.teacher-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.email-display {
+    margin-top: 8px;
+    padding: 8px 0;
+}
+
+.email-text {
+    font-family: monospace;
+    font-size: 14px;
+    color: var(--muted);
+    word-break: break-all;
+}
+
+.copy-email-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+/* Card grid (optional) */
+#teacherList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+}
+
+/* Card */
+.teacher-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 14px;
+    padding: 14px;
+    backdrop-filter: blur(6px);
+    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.teacher-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.teacher-card__name {
+    font-weight: 700;
+    letter-spacing: .2px;
+    margin-bottom: 10px;
+    color: var(--text, #fff);
+}
+
+.teacher-card__email-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.teacher-card__email {
+    flex: 1;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 13px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    color: rgba(255, 255, 255, 0.92);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Icon button */
+.icon-btn {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.92);
+    cursor: pointer;
+    transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+
+.icon-btn:hover {
+    transform: scale(1.03);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.20);
+}
+
+.icon-btn:active {
+    transform: scale(0.98);
+}
+
+.icon-btn:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.35);
+    outline-offset: 2px;
 }
