@@ -883,12 +883,6 @@ body.light .toggleRow .chkBox {
     flex-wrap: wrap;
 }
 
-.footer-center {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0 8px;
-}
 
 
 
@@ -1266,6 +1260,7 @@ body.light .toggleRow .chkBox {
 
 /* Optional: make it match your table/module spacing */
 .customSelectWrap {
+    overflow: visible;
     margin-top: 0;
 }
 
@@ -1335,18 +1330,21 @@ body.light .toggleRow .chkBox {
     margin-top: 15px;
 }
 
-/* Study Resources Page */
+/* ===================== Study Resources Page ===================== */
+
 .semester-container {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
+/* Keep your visuals */
 .accordion-item {
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 14px;
     overflow: hidden;
+    /* keep rounded corners */
     box-shadow: var(--shadow-sm);
 }
 
@@ -1380,6 +1378,7 @@ body.light .toggleRow .chkBox {
     transform: rotate(180deg);
 }
 
+/* IMPORTANT: remove fixed max-height caps; let JS set max-height dynamically */
 .accordion-content {
     max-height: 0;
     overflow: hidden;
@@ -1387,11 +1386,7 @@ body.light .toggleRow .chkBox {
     background: var(--card);
 }
 
-.accordion-content.active {
-    max-height: 1000px;
-    /* Adjust as needed */
-}
-
+/* Module accordion */
 .module-card {
     border-top: 1px solid var(--line);
 }
@@ -1422,12 +1417,7 @@ body.light .toggleRow .chkBox {
     transition: max-height 0.3s ease, padding 0.3s ease;
 }
 
-.module-content.active {
-    max-height: 2000px;
-    /* Increased to accommodate nested accordions */
-    padding: 10px 16px 16px;
-}
-
+/* Resource sections */
 .resource-section {
     margin-top: 12px;
     border: 1px solid var(--line);
@@ -1463,11 +1453,7 @@ body.light .toggleRow .chkBox {
     padding: 0 14px;
 }
 
-.resource-links.active {
-    max-height: 300px;
-    padding: 10px 14px 14px;
-}
-
+/* JS will add padding when open */
 .resource-link {
     display: block;
     padding: 10px 12px;
@@ -1487,14 +1473,20 @@ body.light .toggleRow .chkBox {
     transform: translateY(-1px);
 }
 
-.resource-link:active {
-    transform: translateY(0);
-}
-
 .no-resources {
     padding: 10px 12px;
     color: var(--muted);
     font-style: italic;
     font-size: 14px;
     text-align: center;
+}
+
+.accordion-content.active,
+.module-content.active,
+.resource-links.active {
+    max-height: none !important;
+}
+
+.resource-links .resource-link:last-child {
+    margin-bottom: 8px;
 }

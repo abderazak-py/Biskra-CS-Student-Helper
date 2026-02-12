@@ -243,34 +243,97 @@ function setupAccordionEvents() {
     const semesterHeader = document.querySelector('.accordion-header');
     const resourceHeaders = document.querySelectorAll('.resource-header');
 
-    // Toggle individual module accordions
+    function openPanel(content, paddingOpen) {
+        content.classList.add('active');
+
+        // apply open padding if requested
+        if (paddingOpen) content.style.padding = paddingOpen;
+
+        // set to the real height (no cap)
+        content.style.maxHeight = content.scrollHeight + 'px';
+
+        refreshParents(content);
+    }
+
+    function closePanel(content, paddingClosed) {
+        // remove maxHeight first (animate closed)
+        content.style.maxHeight = '0px';
+        content.classList.remove('active');
+
+        // apply closed padding if requested
+        if (paddingClosed !== null) content.style.padding = paddingClosed;
+
+        refreshParents(content);
+    }
+
+    function togglePanel(content, arrow, paddingOpen = null, paddingClosed = null) {
+        const isOpen = content.classList.contains('active');
+
+        if (isOpen) {
+            closePanel(content, paddingClosed);
+            if (arrow) arrow.classList.remove('rotate');
+        } else {
+            openPanel(content, paddingOpen);
+            if (arrow) arrow.classList.add('rotate');
+        }
+    }
+
+    // When an inner panel opens, parent scrollHeight changes -> update parents maxHeight
+    function refreshParents(el) {
+        let p = el.parentElement;
+        while (p) {
+            if (
+                p.classList &&
+                (p.classList.contains('accordion-content') || p.classList.contains('module-content'))
+            ) {
+                if (p.classList.contains('active')) {
+                    p.style.maxHeight = p.scrollHeight + 'px';
+                }
+            }
+            p = p.parentElement;
+        }
+    }
+
+    // Semester accordion
+    if (semesterHeader) {
+        semesterHeader.addEventListener('click', function () {
+            const content = this.nextElementSibling;
+            const arrow = this.querySelector('.arrow');
+            if (!content) return;
+
+            togglePanel(content, arrow);
+        });
+    }
+
+    // Module accordions
     moduleHeaders.forEach(header => {
         header.addEventListener('click', function () {
             const content = this.nextElementSibling;
             const arrow = this.querySelector('.arrow');
+            if (!content) return;
 
-            content.classList.toggle('active');
-            arrow.classList.toggle('rotate');
+            // module-content needs padding when open (matches your original CSS intent)
+            togglePanel(content, arrow, '10px 16px 16px', '0 16px');
         });
     });
 
-    // Toggle semester accordion
-    semesterHeader.addEventListener('click', function () {
-        const content = this.nextElementSibling;
-        const arrow = this.querySelector('.arrow');
-
-        content.classList.toggle('active');
-        arrow.classList.toggle('rotate');
-    });
-
-    // Toggle individual resource accordions (Cours/TD/TP)
+    // Resource accordions (Cours/TD/TP)
     resourceHeaders.forEach(header => {
         header.addEventListener('click', function () {
             const content = this.nextElementSibling;
             const arrow = this.querySelector('.arrow');
+            if (!content) return;
 
-            content.classList.toggle('active');
-            arrow.classList.toggle('rotate');
+            // resource-links needs bottom padding when open
+            togglePanel(content, arrow, '10px 14px 14px', '0 14px');
         });
+    });
+
+    // Optional: keep heights correct if window resizes
+    window.addEventListener('resize', () => {
+        document.querySelectorAll('.accordion-content.active, .module-content.active, .resource-links.active')
+            .forEach(el => {
+                el.style.maxHeight = el.scrollHeight + 'px';
+            });
     });
 }
