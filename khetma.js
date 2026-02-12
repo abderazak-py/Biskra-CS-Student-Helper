@@ -288,8 +288,12 @@ function initKhetmaHelper() {
     // Check if the khetma page element exists
     const khetmaPageElement = document.getElementById('pagekhetma');
     
+    // Check current route using the new routing system
+    const isOnKhetmaPage = window.location.pathname === '/khetma' || 
+                          (window.location.pathname === '/' && document.querySelector('#pagekhetma.active'));
+    
     // Initialize immediately if on the khetma page or if the page element exists
-    if (window.location.hash === '#khetma' || khetmaPageElement) {
+    if (isOnKhetmaPage || khetmaPageElement) {
         setTimeout(() => {
             renderKhetmaList();
         }, 10);
@@ -298,12 +302,8 @@ function initKhetmaHelper() {
     // Set up event listeners for the add button on any page
     setupEventListeners();
     
-    // Listen for hash changes to update the UI when navigating to khetma page
-    window.addEventListener('hashchange', function() {
-        if (window.location.hash === '#khetma') {
-            setTimeout(renderKhetmaList, 10); // Small delay to ensure page is ready
-        }
-    });
+    // Since we're using History API now, we no longer listen for hashchange
+    // Instead, we rely on the router to call initKhetmaHelper when navigating to the khetma page
 }
 
 /**

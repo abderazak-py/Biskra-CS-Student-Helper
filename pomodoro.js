@@ -285,7 +285,7 @@ function wirePomodoro() {
     }
     if (btnReset) btnReset.onclick = () => resetPomodoro(true);
     if (btnSkip) btnSkip.onclick = () => skipPomodoroPhase();
-    if (btnHome) btnHome.onclick = () => (location.hash = "#home");
+    if (btnHome) btnHome.onclick = () => navigateTo('home');
 
     resetPomodoro(true);
 }

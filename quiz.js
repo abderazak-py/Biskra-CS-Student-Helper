@@ -559,7 +559,7 @@ function wireQuiz() {
 
     if (btnNext) btnNext.onclick = quizNext;
     if (btnRestart) btnRestart.onclick = quizRestart;
-    if (btnHome) btnHome.onclick = () => (location.hash = "#home");
+    if (btnHome) btnHome.onclick = () => navigateTo('home');
 
     quizRestart();
 }
