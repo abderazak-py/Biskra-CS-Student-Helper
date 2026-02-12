@@ -216,7 +216,7 @@ function fillExample(semKey) {
         case "s4":
             set("s4ostd", 12); set("s4ostp", 12); set("s4osex", 11);
             set("s4tltd", 13); set("s4tlex", 10);
-            set("s4rxtd", 11); set("s4rxtp", 12); set("s4rxex", 12);
+            set("s4rctd", 11); set("s4rctp", 12); set("s4rcex", 12);
             set("s4bdtd", 14); set("s4bdtp", 15); set("s4bdex", 11);
             set("s4pootp", 13); set("s4pooex", 10);
             set("s4webtp", 14); set("s4webex", 12);

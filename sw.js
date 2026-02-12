@@ -1,6 +1,5 @@
-// sw.js (final)
 
-const CACHE = "biskra-cs-v25";
+const CACHE = "biskra-cs-v26";
 
 const ASSETS = [
   "/",
@@ -21,6 +20,7 @@ const ASSETS = [
   "/router.js",
   "/theme.js",
   "/ui.js",
+  "resources.js",
 ];
 
 self.addEventListener("install", (event) => {

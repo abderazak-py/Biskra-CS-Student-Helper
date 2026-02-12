@@ -47,7 +47,7 @@ const MODULES = {
     s4: [
         { key: "os", name: "OS", hasTP: true, coef: 3 },
         { key: "tl", name: "TL", coef: 2 },
-        { key: "rx", name: "RX", hasTP: true, coef: 3 },
+        { key: "rc", name: "RC", hasTP: true, coef: 3 },
         { key: "bd", name: "BD", hasTP: true, coef: 3 },
         { key: "eng", name: "English", single: true, coef: 1 },
         { key: "poo", name: "POO", tpOnly: true, coef: 2 },

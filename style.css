@@ -883,6 +883,15 @@ body.light .toggleRow .chkBox {
     flex-wrap: wrap;
 }
 
+.footer-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+}
+
+
+
 .iconLink {
     display: inline-flex;
     align-items: center;
@@ -1119,10 +1128,7 @@ body.light .toggleRow .chkBox {
     background-color: var(--accent);
 }
 
-/* ---------------------------
-   Custom Select (Modern)
-   Works with hidden native <select>
----------------------------- */
+
 
 .customSelect {
     position: relative;
@@ -1301,8 +1307,15 @@ body.light .toggleRow .chkBox {
 }
 
 @keyframes modalFadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .modal-dialog .bd {
@@ -1375,7 +1388,8 @@ body.light .toggleRow .chkBox {
 }
 
 .accordion-content.active {
-    max-height: 1000px; /* Adjust as needed */
+    max-height: 1000px;
+    /* Adjust as needed */
 }
 
 .module-card {
@@ -1409,7 +1423,8 @@ body.light .toggleRow .chkBox {
 }
 
 .module-content.active {
-    max-height: 2000px; /* Increased to accommodate nested accordions */
+    max-height: 2000px;
+    /* Increased to accommodate nested accordions */
     padding: 10px 16px 16px;
 }
 
