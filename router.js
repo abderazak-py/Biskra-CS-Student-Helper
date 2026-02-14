@@ -26,25 +26,35 @@ function currentRoute() {
 }
 
 /**
- * Initializes the pages for each semester with direct HTML content instead of dynamic generation
+ * Initializes the pages for each semester by dynamically generating the UI
  */
 function initPages() {
-    // We no longer need to initialize pages dynamically since they are in HTML
-    // Just ensure any event listeners are attached
+    // Generate the UI for each semester page
     for (const sem of SEMESTERS) {
         const semKey = sem.key;
-        const btnCalcElement = document.getElementById("btnCalc" + semKey);
-        const btnResetElement = document.getElementById("btnReset" + semKey);
-        const btnExampleElement = document.getElementById("btnExample" + semKey);
-        const btnHomeElement = document.getElementById("btnHome" + semKey);
-        
-        if(btnCalcElement) btnCalcElement.addEventListener("click", () => computeAndRender(semKey));
-        if(btnResetElement) btnResetElement.addEventListener("click", () => resetUI(semKey));
-        if(btnExampleElement) btnExampleElement.addEventListener("click", () => {
-            fillExample(semKey);
-            computeAndRender(semKey);
-        });
-        if(btnHomeElement) btnHomeElement.addEventListener("click", () => navigateTo('home'));
+        const pageEl = document.getElementById("page" + semKey);
+
+        if (pageEl && !pageEl.hasChildNodes()) {
+            // Generate the page HTML using the template
+            pageEl.innerHTML = pageTemplate(semKey, sem.label);
+
+            // Build the modules UI
+            buildModulesUI(semKey);
+
+            // Attach event listeners
+            const btnCalc = document.getElementById("btnCalc" + semKey);
+            const btnReset = document.getElementById("btnReset" + semKey);
+            const btnExample = document.getElementById("btnExample" + semKey);
+            const btnHome = document.getElementById("btnHome" + semKey);
+
+            if (btnCalc) btnCalc.addEventListener("click", () => computeAndRender(semKey));
+            if (btnReset) btnReset.addEventListener("click", () => resetUI(semKey));
+            if (btnExample) btnExample.addEventListener("click", () => {
+                fillExample(semKey);
+                computeAndRender(semKey);
+            });
+            if (btnHome) btnHome.addEventListener("click", () => navigateTo('home'));
+        }
     }
 }
 
@@ -57,7 +67,7 @@ function navigateTo(route) {
     const apply = () => {
         const route = currentRoute();
         setActivePage(route);
-        
+
         // Initialize teachers page when navigating to it
         if (route === 'teachers') {
             initTeachersPage();
@@ -85,7 +95,7 @@ function initRouter() {
     const apply = () => {
         const route = currentRoute();
         setActivePage(route);
-        
+
         // Initialize teachers page when navigating to it
         if (route === 'teachers') {
             initTeachersPage();
@@ -103,20 +113,20 @@ function initRouter() {
             renderKhetmaList(); // Assuming this function exists
         }
     };
-    
+
     // Handle initial load
     apply();
-    
+
     // Handle back/forward buttons
     window.addEventListener('popstate', apply);
-    
+
     // Intercept all link clicks to prevent full page reloads
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         const target = event.target.closest('a');
         if (target && target.href.startsWith(window.location.origin)) {
             event.preventDefault();
             const path = new URL(target.href).pathname;
-            if(path !== window.location.pathname) {
+            if (path !== window.location.pathname) {
                 navigateTo(path.substring(1)); // Remove leading slash
             }
         }
