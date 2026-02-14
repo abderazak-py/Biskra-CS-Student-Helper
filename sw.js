@@ -1,10 +1,9 @@
 
-const CACHE = "biskra-cs-v30";
+const CACHE = "biskra-cs-v31";
 
 const ASSETS = [
   "/",
   "/index.html",
-  "/contributors.html",
   "/style.css",
   "/app.js",
   "/manifest.json",
