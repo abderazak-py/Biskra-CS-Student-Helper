@@ -1,5 +1,5 @@
 
-const CACHE = "biskra-cs-v30";
+const CACHE = "biskra-cs-v31";
 
 const ASSETS = [
   "/",
