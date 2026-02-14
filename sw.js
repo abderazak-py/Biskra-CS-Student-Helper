@@ -4,7 +4,6 @@ const CACHE = "biskra-cs-v30";
 const ASSETS = [
   "/",
   "/index.html",
-  "/contributors.html",
   "/style.css",
   "/app.js",
   "/manifest.json",
@@ -71,7 +70,7 @@ self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
 
-  // Handle HTML navigations (contributors.html, index.html, etc.). [web:30]
+  // Handle HTML navigations (index.html, etc.). [web:30]
   if (req.mode === "navigate") {
     event.respondWith(navigationNetworkFirstWithShellFallback(req));
     return;

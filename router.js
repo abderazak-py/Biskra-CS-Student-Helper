@@ -20,7 +20,7 @@ function currentRoute() {
     const path = window.location.pathname;
     const key = path === '/' ? 'home' : path.substring(1);
     // Known static pages
-    const staticPages = ["home", "calc", "pomodoro", "adkar", "quiz", "habits", "flashcards", "resources", "khetma", "teachers", "s1", "s2", "s3", "s4", "s5", "s6"];
+    const staticPages = ["home", "calc", "pomodoro", "adkar", "quiz", "habits", "flashcards", "resources", "khetma", "teachers", "contributors", "s1", "s2", "s3", "s4", "s5", "s6"];
     if (staticPages.includes(key)) return key;
     return SEMESTERS.some((s) => s.key === key) ? key : "home";
 }
