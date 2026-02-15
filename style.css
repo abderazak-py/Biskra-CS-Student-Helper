@@ -957,6 +957,18 @@ body.light .toggleRow .chkBox {
    QUIZ styles
    ========================= */
 
+#pagequiz .actions {
+    justify-content: flex-end;
+}
+
+#pagequiz .quizOptions {
+    text-align: left;
+}
+
+#pagequiz .quizOptionBtn {
+    text-align: left;
+}
+
 .quizTop {
     display: flex;
     gap: 12px;
@@ -982,7 +994,7 @@ body.light .toggleRow .chkBox {
 }
 
 .quizOptionBtn {
-    text-align: left;
+    text-align: right;
     width: 100%;
     border: 1px solid var(--line);
     background: var(--surface-2);
