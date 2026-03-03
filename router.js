@@ -76,6 +76,10 @@ function navigateTo(route) {
         if (route === 'resources') {
             initResourcesPage();
         }
+        // Initialize habits page when navigating to it
+        if (route === 'habits') {
+            renderHabits();
+        }
     };
     apply();
 }
@@ -95,6 +99,10 @@ function initRouter() {
         // Initialize resources page when navigating to it
         if (route === 'resources') {
             initResourcesPage();
+        }
+        // Initialize habits page when navigating to it
+        if (route === 'habits') {
+            renderHabits();
         }
     };
 
