@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles */
+@layer base {
+    * {
+        @apply border-surface-200;
+    }
+
+    body {
+        @apply bg-surface-50 text-surface-900 font-sans antialiased;
+        min-height: 100vh;
+    }
+
+    .dark body,
+    body.dark {
+        @apply bg-surface-950 text-surface-100;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-surface-300 rounded-full;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-surface-400;
+    }
+
+    .dark ::-webkit-scrollbar-thumb {
+        @apply bg-surface-700;
+    }
+
+    .dark ::-webkit-scrollbar-thumb:hover {
+        @apply bg-surface-600;
+    }
+}
+
+/* Custom component styles */
+@layer components {
+
+    /* Card styles - clean, no glass morphism */
+    .card {
+        @apply bg-white rounded-xl border border-surface-200 shadow-soft;
+    }
+
+    .dark .card {
+        @apply bg-surface-900 border-surface-800;
+    }
+
+    .card-interactive {
+        @apply card transition-all duration-200 cursor-pointer;
+    }
+
+    .card-interactive:hover {
+        @apply shadow-soft-md border-surface-300;
+    }
+
+    .dark .card-interactive:hover {
+        @apply border-surface-700;
+    }
+
+    /* Button styles */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm;
+        @apply transition-all duration-150 cursor-pointer;
+    }
+
+    .btn-primary {
+        @apply bg-primary-700 text-white hover:bg-primary-800;
+    }
+
+    .btn-secondary {
+        @apply bg-surface-100 text-surface-700 hover:bg-surface-200;
+    }
+
+    .dark .btn-secondary {
+        @apply bg-surface-800 text-surface-200 hover:bg-surface-700;
+    }
+
+    .btn-ghost {
+        @apply bg-transparent text-surface-600 hover:bg-surface-100;
+    }
+
+    .dark .btn-ghost {
+        @apply text-surface-400 hover:bg-surface-800;
+    }
+
+    /* Input styles */
+    .input {
+        @apply w-full px-4 py-3 rounded-lg bg-white border border-surface-200;
+        @apply text-surface-900 placeholder-surface-400 text-sm;
+        @apply focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20;
+        @apply transition-all duration-150;
+    }
+
+    .dark .input {
+        @apply bg-surface-800 border-surface-700 text-surface-100 placeholder-surface-500;
+    }
+
+    /* Badge styles */
+    .badge {
+        @apply inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium;
+    }
+
+    .badge-primary {
+        @apply bg-primary-100 text-primary-700;
+    }
+
+    .dark .badge-primary {
+        @apply bg-primary-900/30 text-primary-400;
+    }
+
+    .badge-success {
+        @apply bg-green-100 text-green-700;
+    }
+
+    .dark .badge-success {
+        @apply bg-green-900/30 text-green-400;
+    }
+
+    .badge-warning {
+        @apply bg-amber-100 text-amber-700;
+    }
+
+    .dark .badge-warning {
+        @apply bg-amber-900/30 text-amber-400;
+    }
+
+    .badge-danger {
+        @apply bg-red-100 text-red-700;
+    }
+
+    .dark .badge-danger {
+        @apply bg-red-900/30 text-red-400;
+    }
+
+    /* Navigation item */
+    .nav-item {
+        @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-surface-600;
+        @apply transition-all duration-150 cursor-pointer;
+    }
+
+    .dark .nav-item {
+        @apply text-surface-400;
+    }
+
+    .nav-item:hover {
+        @apply bg-surface-100 text-surface-900;
+    }
+
+    .dark .nav-item:hover {
+        @apply bg-surface-800 text-surface-100;
+    }
+
+    .nav-item.active {
+        @apply bg-primary-50 text-primary-700 font-medium;
+    }
+
+    .dark .nav-item.active {
+        @apply bg-primary-900/20 text-primary-400;
+    }
+
+    /* Section label */
+    .section-label {
+        @apply text-xs font-semibold uppercase tracking-wider text-surface-400;
+    }
+
+    /* Divider */
+    .divider {
+        @apply border-t border-surface-200;
+    }
+
+    .dark .divider {
+        @apply border-surface-800;
+    }
+}
+
+/* Animations */
+@layer utilities {
+    .animate-in {
+        animation: animateIn 0.2s ease-out forwards;
+    }
+
+    @keyframes animateIn {
+        from {
+            opacity: 0;
+            transform: translateY(4px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
