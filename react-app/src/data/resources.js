@@ -1,8 +1,9 @@
-// ===================== RESOURCES PAGE =====================
+// Module resources with Cours, TD, TP, and Exam links
 
-// Define resource links configuration for each module
-const RESOURCE_LINKS = {
+export const MODULE_RESOURCES = {
     os: {
+        name: "Operating Systems",
+        semester: "S4",
         cours: [
             { title: "Ch 1", url: "https://drive.google.com/file/d/1k7Oq70Hd9Wmd-O9_Jm-PLR1Mli5EVb8u/view?usp=drivesdk" },
             { title: "Ch 2-1", url: "https://drive.google.com/file/d/1t8t5GpW_ZezWN3kMHVqEAaOiibBRbZ0i/view?usp=drivesdk" },
@@ -26,6 +27,8 @@ const RESOURCE_LINKS = {
         ]
     },
     tl: {
+        name: "Formal Languages",
+        semester: "S4",
         cours: [
             { title: "Ch 1", url: "https://drive.google.com/file/d/1lw1J1HkjpeUQ2CUPJvrWVKn272tXwZtn/view?usp=drivesdk" },
             { title: "Ch 1->3", url: "https://drive.google.com/file/d/1qMmgeZBUuufFiCp0a1EujVFElXofvNjv/view?usp=drivesdk" },
@@ -45,6 +48,8 @@ const RESOURCE_LINKS = {
         ]
     },
     rc: {
+        name: "Computer Networks",
+        semester: "S4",
         cours: [
             { title: "Ch 1 PDF", url: "https://drive.google.com/file/d/1j7K5l-YOqfFdtfh9eOH3itfpZgyNVfQb/view?usp=drivesdk" },
             { title: "Ch 2 PDF", url: "https://drive.google.com/file/d/1j98Dgf5rFX_hoA5U5lQdMi6WKQaoz9SF/view?usp=drivesdk" },
@@ -74,6 +79,8 @@ const RESOURCE_LINKS = {
         ]
     },
     bd: {
+        name: "Database Systems",
+        semester: "S4",
         cours: [
             { title: "Ch 1", url: "https://drive.google.com/file/d/1mOWSFQ7qxrFkH4mW-EL8qN5bd0IlIV68/view?usp=drivesdk" },
             { title: "Ch 2", url: "https://drive.google.com/file/d/1syUXCK1TvtRT2jiOZNxHyInhLBPMVoE4/view?usp=drivesdk" },
@@ -97,6 +104,8 @@ const RESOURCE_LINKS = {
         ]
     },
     poo: {
+        name: "Object-Oriented Programming",
+        semester: "S4",
         cours: [
             { title: "Ch 1", url: "https://drive.google.com/file/d/1iQAVqK_O6TD6qj_DlY-lk5G-uLJFWBOD/view?usp=drivesdk" },
             { title: "Ch 2", url: "https://drive.google.com/file/d/1s8Qk1b-XsrF-u5stonVCEYX3GsnD-EDO/view?usp=drivesdk" },
@@ -118,6 +127,8 @@ const RESOURCE_LINKS = {
         ]
     },
     web: {
+        name: "Web Development",
+        semester: "S4",
         cours: [
             { title: "HTML Ch1", url: "https://drive.google.com/file/d/1-pdqSOfSib1GEQoAXIG8rZRw_9QEHFuk/view?usp=drivesdk" },
             { title: "CSS", url: "https://drive.google.com/file/d/160vs5bYJtDKSREGkeyyW_i9JLHEKtbZ_/view?usp=drivesdk" },
@@ -133,6 +144,8 @@ const RESOURCE_LINKS = {
         ]
     },
     eng: {
+        name: "English",
+        semester: "S4",
         cours: [
             { title: "Ch 1", url: "https://drive.google.com/file/d/10dT06CLNEg4sqtOOFjSlnFz8N9xUy76V/view?usp=drivesdk" },
             { title: "Ch 2", url: "https://drive.google.com/file/d/10b8_qzDCokhNaZOaenkzv2oW3pzk_lOe/view?usp=drivesdk" },
@@ -141,199 +154,34 @@ const RESOURCE_LINKS = {
         ],
         exam: [
             { title: "Exam24_Corr", url: "https://drive.google.com/file/d/185lP7Ya-Wn-8NgEaFXoDm40JRzefzzDf/view?usp=drivesdk" }
-        ],
+        ]
     }
-};
-
-/**
- * Initializes the resources page with S4 modules
- */
-function initResourcesPage() {
-    const moduleList = document.querySelector('.module-list');
-
-    if (!moduleList) return;
-
-    // Get S4 modules from the existing MODULES object
-    const s4Modules = MODULES.s4;
-
-    // Clear any existing content
-    moduleList.innerHTML = '';
-
-    // Create module cards for each S4 module
-    s4Modules.forEach(module => {
-        const moduleCard = document.createElement('div');
-        moduleCard.className = 'module-card';
-
-        // Generate HTML for each resource section based on the configuration
-        const coursSection = generateResourceSection(module.key, 'Cours', 'cours', module);
-        const tdSection = generateResourceSection(module.key, 'TD (Travaux Dirigés)', 'td', module);
-        const tpSection = generateResourceSection(module.key, 'TP (Travaux Pratiques)', 'tp', module);
-        const examSection = generateResourceSection(module.key, 'Examens', 'exam', module);
-
-        moduleCard.innerHTML = `
-            <button class="module-header">
-                <span>${module.name}</span>
-                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-            </button>
-            <div class="module-content">
-                ${coursSection}
-                ${tdSection}
-                ${tpSection}
-                ${examSection}
-            </div>
-        `;
-
-        moduleList.appendChild(moduleCard);
-    });
-
-    // Add event listeners to the accordion headers
-    setupAccordionEvents();
 }
 
-/**
- * Generates HTML for a resource section (Cours/TD/TP)
- */
-function generateResourceSection(moduleKey, sectionTitle, sectionType, module) {
-    // Check if the module has this type of resource (hasTP, tpOnly, etc.)
-    if (sectionType === 'tp' && module.tpOnly && !module.hasTP) {
-        // For tpOnly modules, we still show the TP section
-    } else if (sectionType === 'td' && module.tpOnly) {
-        // Don't show TD section for tpOnly modules
-        if (module.key !== 'eng') {  // Special case: English doesn't have TD/TP
-            return '';
-        }
+// External learning resources
+export const EXTERNAL_RESOURCES = [
+    {
+        title: "freeCodeCamp",
+        desc: "Free coding courses and certifications",
+        url: "https://www.freecodecamp.org/",
+        tags: ["Learning", "Coding"]
+    },
+    {
+        title: "MDN Web Docs",
+        desc: "Web development documentation",
+        url: "https://developer.mozilla.org/",
+        tags: ["Docs", "Web"]
+    },
+    {
+        title: "LeetCode",
+        desc: "Practice coding problems",
+        url: "https://leetcode.com/",
+        tags: ["Practice", "Algorithms"]
+    },
+    {
+        title: "GeeksforGeeks",
+        desc: "CS tutorials and explanations",
+        url: "https://www.geeksforgeeks.org/",
+        tags: ["Tutorials", "CS"]
     }
-
-    const resources = RESOURCE_LINKS[moduleKey] && RESOURCE_LINKS[moduleKey][sectionType]
-        ? RESOURCE_LINKS[moduleKey][sectionType]
-        : [];
-
-    // Return empty string if there are no resources for this section
-    if (resources.length === 0) {
-        return '';
-    }
-
-    const linksHtml = resources.map((resource, index) =>
-        `<a href="${resource.url}" class="resource-link" target="_blank">${resource.title}</a>`
-    ).join('');
-
-    return `
-        <div class="resource-section">
-            <button class="resource-header">
-                <span>${sectionTitle}</span>
-                <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-            </button>
-            <div class="resource-links">
-                ${linksHtml}
-                ${resources.length === 0 ? '<div class="no-resources">Aucun lien disponible pour le moment</div>' : ''}
-            </div>
-        </div>
-    `;
-}
-
-/**
- * Sets up the accordion events for modules
- */
-function setupAccordionEvents() {
-    const moduleHeaders = document.querySelectorAll('.module-header');
-    const semesterHeader = document.querySelector('.accordion-header');
-    const resourceHeaders = document.querySelectorAll('.resource-header');
-
-    function openPanel(content, paddingOpen) {
-        content.classList.add('active');
-
-        // apply open padding if requested
-        if (paddingOpen) content.style.padding = paddingOpen;
-
-        // set to the real height (no cap)
-        content.style.maxHeight = content.scrollHeight + 'px';
-
-        refreshParents(content);
-    }
-
-    function closePanel(content, paddingClosed) {
-        // remove maxHeight first (animate closed)
-        content.style.maxHeight = '0px';
-        content.classList.remove('active');
-
-        // apply closed padding if requested
-        if (paddingClosed !== null) content.style.padding = paddingClosed;
-
-        refreshParents(content);
-    }
-
-    function togglePanel(content, arrow, paddingOpen = null, paddingClosed = null) {
-        const isOpen = content.classList.contains('active');
-
-        if (isOpen) {
-            closePanel(content, paddingClosed);
-            if (arrow) arrow.classList.remove('rotate');
-        } else {
-            openPanel(content, paddingOpen);
-            if (arrow) arrow.classList.add('rotate');
-        }
-    }
-
-    // When an inner panel opens, parent scrollHeight changes -> update parents maxHeight
-    function refreshParents(el) {
-        let p = el.parentElement;
-        while (p) {
-            if (
-                p.classList &&
-                (p.classList.contains('accordion-content') || p.classList.contains('module-content'))
-            ) {
-                if (p.classList.contains('active')) {
-                    p.style.maxHeight = p.scrollHeight + 'px';
-                }
-            }
-            p = p.parentElement;
-        }
-    }
-
-    // Semester accordion
-    if (semesterHeader) {
-        semesterHeader.addEventListener('click', function () {
-            const content = this.nextElementSibling;
-            const arrow = this.querySelector('.arrow');
-            if (!content) return;
-
-            togglePanel(content, arrow);
-        });
-    }
-
-    // Module accordions
-    moduleHeaders.forEach(header => {
-        header.addEventListener('click', function () {
-            const content = this.nextElementSibling;
-            const arrow = this.querySelector('.arrow');
-            if (!content) return;
-
-            // module-content needs padding when open (matches your original CSS intent)
-            togglePanel(content, arrow, '10px 16px 16px', '0 16px');
-        });
-    });
-
-    // Resource accordions (Cours/TD/TP)
-    resourceHeaders.forEach(header => {
-        header.addEventListener('click', function () {
-            const content = this.nextElementSibling;
-            const arrow = this.querySelector('.arrow');
-            if (!content) return;
-
-            // resource-links needs bottom padding when open
-            togglePanel(content, arrow, '10px 14px 14px', '0 14px');
-        });
-    });
-
-    // Optional: keep heights correct if window resizes
-    window.addEventListener('resize', () => {
-        document.querySelectorAll('.accordion-content.active, .module-content.active, .resource-links.active')
-            .forEach(el => {
-                el.style.maxHeight = el.scrollHeight + 'px';
-            });
-    });
-}
+]

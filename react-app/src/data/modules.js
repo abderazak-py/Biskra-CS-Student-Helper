@@ -1,20 +1,6 @@
-// ===================== MODULES DATA =====================
+// Module data for semester calculators
 
-/**
- * @typedef {object} Module
- * @property {string} key - A unique key for the module.
- * @property {string} name - The name of the module.
- * @property {number} coef - The coefficient of the module.
- * @property {boolean} [hasTP] - Whether the module has a practical work (TP) component.
- * @property {boolean} [tpOnly] - Whether the module only has a practical work (TP) component.
- * @property {boolean} [single] - Whether the module has a single mark.
- * @property {boolean} [optional] - Whether the module is optional.
- */
-
-/**
- * @type {Object.<string, Module[]>}
- */
-const MODULES = {
+export const MODULES = {
     s1: [
         { key: "an1", name: "Analysis 1", coef: 4 },
         { key: "alg1", name: "Algebra 1", coef: 3 },
@@ -77,20 +63,11 @@ const MODULES = {
     ],
 };
 
-/**
- * @typedef {object} Semester
- * @property {string} key - The key of the semester.
- * @property {string} label - The label of the semester.
- */
-
-/**
- * @type {Semester[]}
- */
-const SEMESTERS = [
-    { key: "s1", label: "S1 average" },
-    { key: "s2", label: "S2 average" },
-    { key: "s3", label: "S3 average" },
-    { key: "s4", label: "S4 average" },
-    { key: "s5", label: "S5 average" },
-    { key: "s6", label: "S6 average" },
+export const SEMESTERS = [
+    { key: "s1", label: "Semester 1", description: "First-year baseline" },
+    { key: "s2", label: "Semester 2", description: "Foundations" },
+    { key: "s3", label: "Semester 3", description: "Core CS modules" },
+    { key: "s4", label: "Semester 4", description: "Momentum" },
+    { key: "s5", label: "Semester 5", description: "Choices included" },
+    { key: "s6", label: "Semester 6", description: "Final stretch" },
 ];
