@@ -158,9 +158,9 @@ export default function CalculatorPage() {
                                 key={module.key}
                                 className="p-3 rounded-lg bg-surface-50 dark:bg-surface-800/50 border border-surface-200 dark:border-surface-700"
                             >
-                                <div className="flex flex-col lg:flex-row lg:items-center gap-3">
+                                <div className="flex flex-row items-center gap-2 sm:gap-3">
                                     {/* Module name and coef */}
-                                    <div className="flex-1 min-w-0">
+                                    <div className="flex-shrink-0 min-w-0 max-w-[120px] sm:max-w-none sm:flex-1">
                                         <div className="flex items-center gap-2">
                                             <span className="font-medium text-surface-900 dark:text-surface-100 text-sm truncate">
                                                 {module.name}
