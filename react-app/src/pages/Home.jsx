@@ -5,11 +5,8 @@ import {
     Timer,
     Moon,
     Brain,
-    CheckSquare,
     Users,
     ChevronRight,
-    Calendar,
-    GraduationCap,
 } from 'lucide-react'
 
 // Primary action - most used tool
@@ -44,17 +41,10 @@ const secondaryTools = [
 
 // Tertiary tools - useful but less frequent
 const otherTools = [
-    { to: '/habits', icon: CheckSquare, title: 'Habits', description: 'Track daily study habits' },
     { to: '/quiz', icon: Brain, title: 'Quiz', description: 'Test your CS knowledge' },
     { to: '/adkar', icon: Moon, title: 'Adkar', description: 'Morning & evening supplications' },
 ]
 
-// Current semester info (could be dynamic)
-const currentSemester = {
-    season: 'Spring',
-    year: '2026',
-    week: 'Midterms',
-}
 
 export default function Home() {
     return (
@@ -69,10 +59,6 @@ export default function Home() {
                         <p className="text-surface-500 dark:text-surface-400 mt-1">
                             University of Biskra
                         </p>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-surface-500 dark:text-surface-400">
-                        <Calendar className="w-4 h-4" />
-                        <span>{currentSemester.season} {currentSemester.year} • {currentSemester.week}</span>
                     </div>
                 </div>
             </header>
@@ -158,20 +144,6 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Helpful Tip */}
-            <section className="card p-4 bg-primary-50 dark:bg-primary-900/20 border-primary-200 dark:border-primary-800">
-                <div className="flex items-start gap-3">
-                    <GraduationCap className="w-5 h-5 text-primary-600 dark:text-primary-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                        <p className="text-sm text-primary-800 dark:text-primary-200 font-medium">
-                            Tip: Use the calculator before registration week
-                        </p>
-                        <p className="text-xs text-primary-600 dark:text-primary-400 mt-1">
-                            Know your average in advance to plan which modules to prioritize or retake.
-                        </p>
-                    </div>
-                </div>
-            </section>
         </div>
     )
 }

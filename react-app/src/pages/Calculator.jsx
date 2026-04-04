@@ -1,6 +1,8 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Calculator, RefreshCw, Award, AlertCircle } from 'lucide-react'
 import { MODULES, SEMESTERS } from '../data/modules'
+
+const STORAGE_KEY = 'calculator_grades'
 
 function getModuleAverage(module, grades) {
     if (module.single) {
@@ -27,10 +29,21 @@ function getModuleGrade(module, avg) {
 }
 
 export default function CalculatorPage() {
-    const [semester, setSemester] = useState('s1')
-    const [grades, setGrades] = useState({})
+    const [semester, setSemester] = useState(() => {
+        const saved = localStorage.getItem(STORAGE_KEY)
+        return saved ? JSON.parse(saved).semester : 's1'
+    })
+    const [grades, setGrades] = useState(() => {
+        const saved = localStorage.getItem(STORAGE_KEY)
+        return saved ? JSON.parse(saved).grades : {}
+    })
 
     const modules = MODULES[semester] || []
+
+    // Save to localStorage whenever grades or semester changes
+    useEffect(() => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ semester, grades }))
+    }, [semester, grades])
 
     const handleGradeChange = (key, value) => {
         const numValue = value === '' ? null : parseFloat(value)

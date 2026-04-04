@@ -1,10 +1,11 @@
-import { Heart, Github, ExternalLink } from 'lucide-react'
+import { Heart, Github, ExternalLink, Youtube } from 'lucide-react'
 
 const CONTRIBUTORS = [
     {
         name: 'Abderazak Achour',
         role: 'Owner and Founder',
         github: 'https://github.com/abderazak-py',
+        youtube: 'https://www.youtube.com/@abderrazak-dev',
     },
     {
         name: 'Farhat',
@@ -71,6 +72,17 @@ export default function ContributorsPage() {
                             </div>
                         </div>
                         <div className="flex items-center gap-2 text-surface-400">
+                            {contributor.youtube && (
+                                <a
+                                    href={contributor.youtube}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="hover:text-red-500 transition-colors"
+                                >
+                                    <Youtube className="w-4 h-4" />
+                                </a>
+                            )}
                             <Github className="w-4 h-4" />
                             <ExternalLink className="w-3.5 h-3.5" />
                         </div>

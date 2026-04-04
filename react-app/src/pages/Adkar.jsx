@@ -1,6 +1,29 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Moon, Sun, Star, Check, RotateCcw } from 'lucide-react'
 import { ADKAR_MORNING, ADKAR_EVENING, ADKAR_GENERAL } from '../data/adkar'
+
+const STORAGE_KEY = 'adkar_counts'
+
+// Get today's date string (YYYY-MM-DD)
+const getTodayString = () => new Date().toISOString().split('T')[0]
+
+// Load counts from localStorage, reset if new day
+const loadCounts = () => {
+    const saved = localStorage.getItem(STORAGE_KEY)
+    if (!saved) return { date: getTodayString(), counts: {} }
+
+    const data = JSON.parse(saved)
+    // If the date is different (new day), reset all counts
+    if (data.date !== getTodayString()) {
+        return { date: getTodayString(), counts: {} }
+    }
+    return data
+}
+
+// Save counts to localStorage
+const saveCounts = (date, counts) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ date, counts }))
+}
 
 const CATEGORIES = [
     { key: 'morning', label: 'Morning', icon: Sun, data: ADKAR_MORNING, bg: 'bg-amber-100 dark:bg-amber-900/30', color: 'text-amber-600 dark:text-amber-400' },
@@ -8,19 +31,18 @@ const CATEGORIES = [
     { key: 'general', label: 'General', icon: Star, data: ADKAR_GENERAL, bg: 'bg-emerald-100 dark:bg-emerald-900/30', color: 'text-emerald-600 dark:text-emerald-400' },
 ]
 
-function DikrCard({ dikr, index }) {
-    const [count, setCount] = useState(0)
+function DikrCard({ dikr, index, count, onIncrement, onReset }) {
     const isComplete = count >= dikr.count
 
     const handleTap = () => {
         if (count < dikr.count) {
-            setCount((prev) => prev + 1)
+            onIncrement(index)
         }
     }
 
     const handleReset = (e) => {
         e.stopPropagation()
-        setCount(0)
+        onReset(index)
     }
 
     const progress = (count / dikr.count) * 100
@@ -88,7 +110,43 @@ function DikrCard({ dikr, index }) {
 
 export default function AdkarPage() {
     const [category, setCategory] = useState('morning')
+    const [savedData, setSavedData] = useState(() => loadCounts())
     const currentCategory = CATEGORIES.find((c) => c.key === category)
+
+    // Save to localStorage whenever counts change
+    useEffect(() => {
+        saveCounts(savedData.date, savedData.counts)
+    }, [savedData])
+
+    // Get count for a specific dikr in current category
+    const getCount = (index) => {
+        const key = `${category}_${index}`
+        return savedData.counts[key] || 0
+    }
+
+    // Increment count for a dikr
+    const handleIncrement = (index) => {
+        const key = `${category}_${index}`
+        setSavedData((prev) => ({
+            ...prev,
+            counts: {
+                ...prev.counts,
+                [key]: (prev.counts[key] || 0) + 1
+            }
+        }))
+    }
+
+    // Reset count for a dikr
+    const handleReset = (index) => {
+        const key = `${category}_${index}`
+        setSavedData((prev) => ({
+            ...prev,
+            counts: {
+                ...prev.counts,
+                [key]: 0
+            }
+        }))
+    }
 
     return (
         <div className="max-w-3xl mx-auto space-y-6">
@@ -131,7 +189,14 @@ export default function AdkarPage() {
             {/* Adkar List */}
             <div className="space-y-2">
                 {currentCategory.data.map((dikr, index) => (
-                    <DikrCard key={index} dikr={dikr} index={index} />
+                    <DikrCard
+                        key={index}
+                        dikr={dikr}
+                        index={index}
+                        count={getCount(index)}
+                        onIncrement={handleIncrement}
+                        onReset={handleReset}
+                    />
                 ))}
             </div>
 

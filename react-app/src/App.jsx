@@ -6,7 +6,6 @@ import Resources from './pages/Resources'
 import Pomodoro from './pages/Pomodoro'
 import Adkar from './pages/Adkar'
 import Quiz from './pages/Quiz'
-import Habits from './pages/Habits'
 import Teachers from './pages/Teachers'
 import Contributors from './pages/Contributors'
 
@@ -20,7 +19,6 @@ function App() {
                 <Route path="pomodoro" element={<Pomodoro />} />
                 <Route path="adkar" element={<Adkar />} />
                 <Route path="quiz" element={<Quiz />} />
-                <Route path="habits" element={<Habits />} />
                 <Route path="teachers" element={<Teachers />} />
                 <Route path="contributors" element={<Contributors />} />
             </Route>

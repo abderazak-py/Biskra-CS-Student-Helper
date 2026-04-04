@@ -24,7 +24,6 @@ const navItems = [
     { to: '/pomodoro', icon: Timer, label: 'Pomodoro' },
     { to: '/adkar', icon: Moon, label: 'Adkar' },
     { to: '/quiz', icon: Brain, label: 'Quiz' },
-    { to: '/habits', icon: CheckSquare, label: 'Habits' },
     { to: '/teachers', icon: Users, label: 'Teachers' },
 ]
 
