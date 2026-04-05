@@ -7,7 +7,6 @@ import {
     Timer,
     Moon,
     Brain,
-    CheckSquare,
     Users,
     Menu,
     X,
