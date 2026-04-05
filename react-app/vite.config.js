@@ -9,6 +9,8 @@ export default defineConfig({
             registerType: 'autoUpdate',
             includeAssets: ['icon.png'],
             injectRegister: false,
+            skipWaiting: true,
+            clientsClaim: true,
             manifest: {
                 name: 'CS Student Helper - Biskra University',
                 short_name: 'CS Helper',
@@ -42,6 +44,7 @@ export default defineConfig({
                 globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
                 navigateFallback: '/',
                 navigateFallbackDenylist: [/^\/api/],
+                cleanupOutdatedCaches: true,
                 runtimeCaching: [
                     {
                         urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
