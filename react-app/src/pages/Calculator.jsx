@@ -167,9 +167,24 @@ export default function CalculatorPage() {
                                 key={module.key}
                                 className="p-3 rounded-lg bg-surface-50 dark:bg-surface-800/50 border border-surface-200 dark:border-surface-700"
                             >
-                                <div className="flex flex-row items-center gap-2 sm:gap-3">
-                                    {/* Module name and coef */}
-                                    <div className="flex-shrink-0 min-w-0 max-w-[120px] sm:max-w-none sm:flex-1">
+                                {/* Mobile: Module name left, coef right */}
+                                <div className="flex justify-between items-center sm:hidden mb-3">
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-medium text-surface-900 dark:text-surface-100 text-sm truncate">
+                                            {module.name}
+                                        </span>
+                                        {module.optional && (
+                                            <span className="badge badge-primary text-2xs">Optional</span>
+                                        )}
+                                    </div>
+                                    <span className="text-xs text-surface-400 dark:text-surface-500">
+                                        Coef: {module.coef}
+                                    </span>
+                                </div>
+
+                                <div className="sm:flex sm:flex-row sm:items-center sm:gap-3">
+                                    {/* Desktop: Module name and coef */}
+                                    <div className="hidden sm:flex-shrink-0 sm:min-w-0 sm:max-w-[120px] sm:max-w-none sm:flex-1 sm:flex sm:flex-col">
                                         <div className="flex items-center gap-2">
                                             <span className="font-medium text-surface-900 dark:text-surface-100 text-sm truncate">
                                                 {module.name}
@@ -183,85 +198,88 @@ export default function CalculatorPage() {
                                         </span>
                                     </div>
 
-                                    {/* Grade inputs */}
-                                    <div className="flex items-center gap-2 sm:gap-3">
-                                        {/* Exam input - shown for all except single modules (which still use exam key) */}
-                                        {!module.single && (
-                                            <div className="flex flex-col">
-                                                <label className="text-xs text-surface-400 dark:text-surface-500 mb-1">
-                                                    Exam
-                                                </label>
-                                                <input
-                                                    type="number"
-                                                    min="0"
-                                                    max="20"
-                                                    step="0.25"
-                                                    value={grades[examKey] ?? ''}
-                                                    onChange={(e) => handleGradeChange(examKey, e.target.value)}
-                                                    className="input w-16 sm:w-20 text-center text-sm py-2"
-                                                    placeholder="0-20"
-                                                />
-                                            </div>
-                                        )}
+                                    {/* Grade inputs row: inputs left, average right */}
+                                    <div className="flex items-center justify-between gap-2 sm:gap-3 w-full sm:w-auto">
+                                        {/* Inputs container - left side */}
+                                        <div className="flex items-center gap-2 sm:gap-3">
+                                            {/* Exam input - shown for all except single modules (which still use exam key) */}
+                                            {!module.single && (
+                                                <div className="flex flex-col">
+                                                    <label className="text-xs text-surface-400 dark:text-surface-500 mb-1">
+                                                        Exam
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        min="0"
+                                                        max="20"
+                                                        step="0.25"
+                                                        value={grades[examKey] ?? ''}
+                                                        onChange={(e) => handleGradeChange(examKey, e.target.value)}
+                                                        className="input w-16 sm:w-20 text-center text-sm py-2"
+                                                        placeholder="0-20"
+                                                    />
+                                                </div>
+                                            )}
 
-                                        {/* TD input - shown for regular modules and hasTP modules */}
-                                        {!module.single && !module.tpOnly && (
-                                            <div className="flex flex-col">
-                                                <label className="text-xs text-surface-400 dark:text-surface-500 mb-1">
-                                                    TD
-                                                </label>
-                                                <input
-                                                    type="number"
-                                                    min="0"
-                                                    max="20"
-                                                    step="0.25"
-                                                    value={grades[tdKey] ?? ''}
-                                                    onChange={(e) => handleGradeChange(tdKey, e.target.value)}
-                                                    className="input w-16 sm:w-20 text-center text-sm py-2"
-                                                    placeholder="0-20"
-                                                />
-                                            </div>
-                                        )}
+                                            {/* TD input - shown for regular modules and hasTP modules */}
+                                            {!module.single && !module.tpOnly && (
+                                                <div className="flex flex-col">
+                                                    <label className="text-xs text-surface-400 dark:text-surface-500 mb-1">
+                                                        TD
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        min="0"
+                                                        max="20"
+                                                        step="0.25"
+                                                        value={grades[tdKey] ?? ''}
+                                                        onChange={(e) => handleGradeChange(tdKey, e.target.value)}
+                                                        className="input w-16 sm:w-20 text-center text-sm py-2"
+                                                        placeholder="0-20"
+                                                    />
+                                                </div>
+                                            )}
 
-                                        {/* TP input - shown for hasTP and tpOnly modules */}
-                                        {(module.hasTP || module.tpOnly) && (
-                                            <div className="flex flex-col">
-                                                <label className="text-xs text-surface-400 dark:text-surface-500 mb-1">
-                                                    TP
-                                                </label>
-                                                <input
-                                                    type="number"
-                                                    min="0"
-                                                    max="20"
-                                                    step="0.25"
-                                                    value={grades[tpKey] ?? ''}
-                                                    onChange={(e) => handleGradeChange(tpKey, e.target.value)}
-                                                    className="input w-16 sm:w-20 text-center text-sm py-2"
-                                                    placeholder="0-20"
-                                                />
-                                            </div>
-                                        )}
+                                            {/* TP input - shown for hasTP and tpOnly modules */}
+                                            {(module.hasTP || module.tpOnly) && (
+                                                <div className="flex flex-col">
+                                                    <label className="text-xs text-surface-400 dark:text-surface-500 mb-1">
+                                                        TP
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        min="0"
+                                                        max="20"
+                                                        step="0.25"
+                                                        value={grades[tpKey] ?? ''}
+                                                        onChange={(e) => handleGradeChange(tpKey, e.target.value)}
+                                                        className="input w-16 sm:w-20 text-center text-sm py-2"
+                                                        placeholder="0-20"
+                                                    />
+                                                </div>
+                                            )}
 
-                                        {/* Single module input */}
-                                        {module.single && (
-                                            <div className="flex flex-col">
-                                                <label className="text-xs text-surface-400 dark:text-surface-500 mb-1">
-                                                    Grade
-                                                </label>
-                                                <input
-                                                    type="number"
-                                                    min="0"
-                                                    max="20"
-                                                    step="0.25"
-                                                    value={grades[examKey] ?? ''}
-                                                    onChange={(e) => handleGradeChange(examKey, e.target.value)}
-                                                    className="input w-16 sm:w-20 text-center text-sm py-2"
-                                                    placeholder="0-20"
-                                                />
-                                            </div>
-                                        )}
+                                            {/* Single module input */}
+                                            {module.single && (
+                                                <div className="flex flex-col">
+                                                    <label className="text-xs text-surface-400 dark:text-surface-500 mb-1">
+                                                        Grade
+                                                    </label>
+                                                    <input
+                                                        type="number"
+                                                        min="0"
+                                                        max="20"
+                                                        step="0.25"
+                                                        value={grades[examKey] ?? ''}
+                                                        onChange={(e) => handleGradeChange(examKey, e.target.value)}
+                                                        className="input w-16 sm:w-20 text-center text-sm py-2"
+                                                        placeholder="0-20"
+                                                    />
+                                                </div>
+                                            )}
+                                        </div>
 
-                                        {/* Module average */}
+                                        {/* Module average - right side */}
                                         <div className="flex flex-col items-center min-w-[50px]">
                                             <label className="text-xs text-surface-400 dark:text-surface-500 mb-1">
                                                 Avg
