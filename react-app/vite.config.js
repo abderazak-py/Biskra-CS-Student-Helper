@@ -8,6 +8,7 @@ export default defineConfig({
         VitePWA({
             registerType: 'autoUpdate',
             includeAssets: ['icon.png'],
+            injectRegister: false,
             manifest: {
                 name: 'CS Student Helper - Biskra University',
                 short_name: 'CS Helper',
@@ -39,6 +40,8 @@ export default defineConfig({
             },
             workbox: {
                 globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
+                navigateFallback: '/',
+                navigateFallbackDenylist: [/^\/api/],
                 runtimeCaching: [
                     {
                         urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -65,6 +68,18 @@ export default defineConfig({
                             },
                             cacheableResponse: {
                                 statuses: [0, 200]
+                            }
+                        }
+                    },
+                    {
+                        // Cache all local assets with StaleWhileRevalidate for better offline support
+                        urlPattern: /\.(?:js|css|html|png|svg|ico)$/,
+                        handler: 'StaleWhileRevalidate',
+                        options: {
+                            cacheName: 'local-assets-cache',
+                            expiration: {
+                                maxEntries: 50,
+                                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
                             }
                         }
                     }
