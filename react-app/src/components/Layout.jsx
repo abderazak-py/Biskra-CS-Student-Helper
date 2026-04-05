@@ -13,8 +13,10 @@ import {
     GraduationCap,
     Github,
     Heart,
+    Download,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { usePWAInstall } from '../hooks/usePWAInstall'
 
 const navItems = [
     { to: '/', icon: Home, label: 'Home' },
@@ -33,6 +35,7 @@ const bottomNavItems = [
 export default function Layout() {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const location = useLocation()
+    const { canInstall, install, isInstalled } = usePWAInstall()
 
     const getPageTitle = () => {
         const item = navItems.find((item) => item.to === location.pathname)
@@ -153,6 +156,17 @@ export default function Layout() {
                                 {getPageTitle()}
                             </h2>
                         </div>
+
+                        {/* Install PWA button */}
+                        {canInstall && (
+                            <button
+                                onClick={install}
+                                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium transition-colors"
+                            >
+                                <Download className="w-4 h-4" />
+                                <span className="hidden sm:inline">Install App</span>
+                            </button>
+                        )}
 
                         {/* Close button for mobile */}
                         <button

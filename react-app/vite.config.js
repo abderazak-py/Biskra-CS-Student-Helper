@@ -7,7 +7,7 @@ export default defineConfig({
         react(),
         VitePWA({
             registerType: 'autoUpdate',
-            includeAssets: ['icon.png'],
+            includeAssets: ['/icon.png'],
             injectRegister: false,
             skipWaiting: true,
             clientsClaim: true,
@@ -24,25 +24,25 @@ export default defineConfig({
                 categories: ['education', 'productivity'],
                 icons: [
                     {
-                        src: 'icon.png',
+                        src: '/icon.png',
                         sizes: '192x192',
                         type: 'image/png',
                         purpose: 'any'
                     },
                     {
-                        src: 'icon.png',
+                        src: '/icon.png',
                         sizes: '512x512',
                         type: 'image/png',
                         purpose: 'any'
                     },
                     {
-                        src: 'icon.png',
+                        src: '/icon.png',
                         sizes: '192x192',
                         type: 'image/png',
                         purpose: 'maskable'
                     },
                     {
-                        src: 'icon.png',
+                        src: '/icon.png',
                         sizes: '512x512',
                         type: 'image/png',
                         purpose: 'maskable'
