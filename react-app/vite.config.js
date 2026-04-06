@@ -9,8 +9,10 @@ export default defineConfig({
             registerType: 'autoUpdate',
             includeAssets: ['icon.png'],
             additionalManifestEntries: [
-                { url: '/', revision: null }
+                { url: '/', revision: 'v1.0.2' }
             ],
+            filename: 'sw.js',
+            scope: '/',
             injectRegister: false,
             skipWaiting: true,
             clientsClaim: true,
@@ -53,7 +55,9 @@ export default defineConfig({
                 ]
             },
             workbox: {
+                globDirectory: 'dist',
                 globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
+                dontCacheBustURLsMatching: /\.[0-9a-f]{8}\./,
                 navigateFallback: '/index.html',
                 navigateFallbackAllowlist: [/^\/$/],
                 navigateFallbackDenylist: [/^\/api/],
