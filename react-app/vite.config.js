@@ -7,7 +7,10 @@ export default defineConfig({
         react(),
         VitePWA({
             registerType: 'autoUpdate',
-            includeAssets: ['/icon.png'],
+            includeAssets: ['icon.png'],
+            additionalManifestEntries: [
+                { url: '/', revision: null }
+            ],
             injectRegister: false,
             skipWaiting: true,
             clientsClaim: true,
@@ -51,7 +54,8 @@ export default defineConfig({
             },
             workbox: {
                 globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
-                navigateFallback: '/',
+                navigateFallback: '/index.html',
+                navigateFallbackAllowlist: [/^\/$/],
                 navigateFallbackDenylist: [/^\/api/],
                 cleanupOutdatedCaches: true,
                 runtimeCaching: [

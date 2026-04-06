@@ -169,12 +169,14 @@ export default function Layout() {
                         )}
 
                         {/* Close button for mobile */}
-                        <button
-                            onClick={() => setSidebarOpen(false)}
-                            className="lg:hidden p-2 -mr-2 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 dark:text-surface-400 transition-colors"
-                        >
-                            <X className="w-5 h-5" />
-                        </button>
+                        {sidebarOpen && (
+                            <button
+                                onClick={() => setSidebarOpen(false)}
+                                className="lg:hidden p-2 -mr-2 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 dark:text-surface-400 transition-colors"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                        )}
                     </div>
                 </header>
 
