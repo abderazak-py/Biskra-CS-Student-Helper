@@ -19,13 +19,13 @@ function getModuleAverage(module, grades) {
         const td = grades[`${module.key}_td`]
         const tp = grades[`${module.key}_tp`]
         if (exam == null || td == null || tp == null) return null
-        return exam * 0.5 + td * 0.25 + tp * 0.25
+        return exam * 0.6 + td * 0.2 + tp * 0.2
     }
     // Regular modules: Exam + TD
     const exam = grades[`${module.key}_exam`]
     const td = grades[`${module.key}_td`]
     if (exam == null || td == null) return null
-    return exam * 0.7 + td * 0.3
+    return exam * 0.6 + td * 0.4
 }
 
 function getModuleGrade(module, avg) {
