@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import Calculator from './pages/Calculator'
@@ -11,18 +12,21 @@ import Contributors from './pages/Contributors'
 
 function App() {
     return (
-        <Routes>
-            <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route path="calculator" element={<Calculator />} />
-                <Route path="resources" element={<Resources />} />
-                <Route path="pomodoro" element={<Pomodoro />} />
-                <Route path="adkar" element={<Adkar />} />
-                <Route path="quiz" element={<Quiz />} />
-                <Route path="teachers" element={<Teachers />} />
-                <Route path="contributors" element={<Contributors />} />
-            </Route>
-        </Routes>
+        <>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="calculator" element={<Calculator />} />
+                    <Route path="resources" element={<Resources />} />
+                    <Route path="pomodoro" element={<Pomodoro />} />
+                    <Route path="adkar" element={<Adkar />} />
+                    <Route path="quiz" element={<Quiz />} />
+                    <Route path="teachers" element={<Teachers />} />
+                    <Route path="contributors" element={<Contributors />} />
+                </Route>
+            </Routes>
+            <SpeedInsights />
+        </>
     )
 }
 
