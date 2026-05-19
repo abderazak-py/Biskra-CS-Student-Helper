@@ -39,27 +39,37 @@ function getModuleGrade(module, avg) {
 export default function CalculatorPage() {
     const [semester, setSemester] = useState(() => {
         const saved = localStorage.getItem(STORAGE_KEY)
-        return saved ? JSON.parse(saved).semester : 's1'
+        return saved ? Object.keys(JSON.parse(saved))[0] || 's1' : 's1'
     })
-    const [grades, setGrades] = useState(() => {
+    const [allGrades, setAllGrades] = useState(() => {
         const saved = localStorage.getItem(STORAGE_KEY)
-        return saved ? JSON.parse(saved).grades : {}
+        return saved ? JSON.parse(saved) : {}
     })
+
+    const grades = allGrades[semester] || {}
 
     const modules = MODULES[semester] || []
 
-    // Save to localStorage whenever grades or semester changes
+    // Save to localStorage whenever semester or grades change
     useEffect(() => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ semester, grades }))
-    }, [semester, grades])
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(allGrades))
+    }, [allGrades])
 
     const handleGradeChange = (key, value) => {
         const numValue = value === '' ? null : parseFloat(value)
-        setGrades((prev) => ({ ...prev, [key]: numValue }))
+        const newGrades = { ...grades, [key]: numValue }
+        // Update state for current semester grades
+        setAllGrades((prev) => ({
+            ...prev,
+            [semester]: newGrades,
+        }))
     }
 
     const resetGrades = () => {
-        setGrades({})
+        setAllGrades((prev) => ({
+            ...prev,
+            [semester]: {},
+        }))
     }
 
     const result = useMemo(() => {
@@ -132,10 +142,7 @@ export default function CalculatorPage() {
                     {SEMESTERS.map((sem) => (
                         <button
                             key={sem.key}
-                            onClick={() => {
-                                setSemester(sem.key)
-                                setGrades({})
-                            }}
+                            onClick={() => setSemester(sem.key)}
                             className={`
                                 p-2.5 rounded-lg text-center transition-all text-sm
                                 ${semester === sem.key
