@@ -76,9 +76,21 @@ export default function CalculatorPage() {
         let totalCoef = 0
         let totalPoints = 0
         let allFilled = true
+        let totalCredits = 0
+        let earnedCredits = 0
+        const hasCredits = modules.some((m) => m.credit !== undefined)
+
+        if (hasCredits) {
+            totalCredits = modules.reduce((sum, m) => sum + (m.credit || 0), 0)
+        }
 
         modules.forEach((module) => {
             const avg = getModuleAverage(module, grades)
+            
+            if (hasCredits && avg != null && avg >= 10) {
+                earnedCredits += module.credit || 0
+            }
+
             if (avg == null) {
                 allFilled = false
                 return
@@ -92,9 +104,14 @@ export default function CalculatorPage() {
             totalPoints += grade * module.coef
         })
 
-        const average = totalCoef > 0 ? totalPoints / totalCoef : null
+        const average = (allFilled && totalCoef > 0) ? totalPoints / totalCoef : null
 
-        return { average, totalCoef, allFilled }
+        // Apply LMD compensation rule: if overall average >= 10, all credits are earned
+        if (hasCredits && allFilled && average != null && average >= 10) {
+            earnedCredits = totalCredits
+        }
+
+        return { average, totalCoef, allFilled, hasCredits, totalCredits, earnedCredits }
     }, [modules, grades])
 
     const getGradeColor = (avg) => {
@@ -185,7 +202,7 @@ export default function CalculatorPage() {
                                         )}
                                     </div>
                                     <span className="text-xs text-surface-400 dark:text-surface-500">
-                                        Coef: {module.coef}
+                                        Coef: {module.coef} {module.credit !== undefined ? `| Credit: ${module.credit}` : ''}
                                     </span>
                                 </div>
 
@@ -201,7 +218,7 @@ export default function CalculatorPage() {
                                             )}
                                         </div>
                                         <span className="text-xs text-surface-400 dark:text-surface-500">
-                                            Coef: {module.coef}
+                                            Coef: {module.coef} {module.credit !== undefined ? `| Credit: ${module.credit}` : ''}
                                         </span>
                                     </div>
 
@@ -287,13 +304,18 @@ export default function CalculatorPage() {
                                         </div>
 
                                         {/* Module average - right side */}
-                                        <div className="flex flex-col items-center min-w-[50px]">
+                                        <div className="flex flex-col items-center min-w-[64px]">
                                             <label className="text-xs text-surface-400 dark:text-surface-500 mb-1">
                                                 Avg
                                             </label>
                                             <span className={`text-base font-semibold ${gradeColor}`}>
                                                 {avg != null ? avg.toFixed(2) : '-'}
                                             </span>
+                                            {module.credit !== undefined && avg != null && (
+                                                <span className={`text-2xs mt-0.5 font-medium ${avg >= 10 ? 'text-green-600 dark:text-green-400' : 'text-surface-400 dark:text-surface-500'}`}>
+                                                    {avg >= 10 ? `+${module.credit} Cr` : '0 Cr'}
+                                                </span>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -304,39 +326,91 @@ export default function CalculatorPage() {
             </div>
 
             {/* Result */}
-            <div className="card p-4">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                        <div className="p-3 rounded-lg bg-primary-100 dark:bg-primary-900/30">
-                            <Award className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+            <div className={result.hasCredits ? "grid grid-cols-1 md:grid-cols-2 gap-4" : ""}>
+                {/* Average Card */}
+                <div className="card p-4 flex flex-col justify-between">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
+                        <div className="flex items-center gap-4">
+                            <div className="p-3 rounded-lg bg-primary-100 dark:bg-primary-900/30">
+                                <Award className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                            </div>
+                            <div>
+                                <p className="text-xs text-surface-500 dark:text-surface-400 uppercase tracking-wide">
+                                    Semester Average
+                                </p>
+                                <p className={`text-3xl font-bold ${getGradeColor(result.average)}`}>
+                                    {result.average != null ? result.average.toFixed(2) : '--.--'}
+                                </p>
+                            </div>
                         </div>
-                        <div>
-                            <p className="text-xs text-surface-500 dark:text-surface-400 uppercase tracking-wide">
-                                Semester Average
-                            </p>
-                            <p className={`text-3xl font-bold ${getGradeColor(result.average)}`}>
-                                {result.average != null ? result.average.toFixed(2) : '--.--'}
-                            </p>
-                        </div>
+
+                        {result.average != null && (
+                            <div className="flex items-center gap-3">
+                                {getGradeStatus(result.average) && (
+                                    <span
+                                        className={`badge ${getGradeStatus(result.average).color} text-sm px-3 py-1.5`}
+                                    >
+                                        {getGradeStatus(result.average).text}
+                                    </span>
+                                )}
+                            </div>
+                        )}
                     </div>
 
-                    {result.average != null && (
-                        <div className="flex items-center gap-3">
-                            {getGradeStatus(result.average) && (
-                                <span
-                                    className={`badge ${getGradeStatus(result.average).color} text-sm px-3 py-1.5`}
-                                >
-                                    {getGradeStatus(result.average).text}
-                                </span>
-                            )}
+                    {!result.allFilled && result.average == null && (
+                        <div className="mt-4 flex items-center gap-2 text-sm text-surface-400 dark:text-surface-500">
+                            <AlertCircle className="w-4 h-4" />
+                            Enter your grades to calculate the average
                         </div>
                     )}
                 </div>
 
-                {!result.allFilled && result.average == null && (
-                    <div className="mt-4 flex items-center gap-2 text-sm text-surface-400 dark:text-surface-500">
-                        <AlertCircle className="w-4 h-4" />
-                        Enter your grades to calculate the average
+                {/* Credit Score Card */}
+                {result.hasCredits && (
+                    <div className="card p-4 flex flex-col justify-between">
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
+                            <div className="flex items-center gap-4">
+                                <div className="p-3 rounded-lg bg-emerald-100 dark:bg-emerald-900/30">
+                                    <Award className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                                </div>
+                                <div>
+                                    <p className="text-xs text-surface-500 dark:text-surface-400 uppercase tracking-wide">
+                                        Credit Score
+                                    </p>
+                                    <p className={`text-3xl font-bold ${result.earnedCredits === result.totalCredits && result.totalCredits > 0 ? 'text-green-600 dark:text-green-400' : 'text-amber-600 dark:text-amber-400'}`}>
+                                        {result.earnedCredits} / {result.totalCredits}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {result.average != null && (
+                                <div className="flex items-center gap-3">
+                                    {result.average >= 10 ? (
+                                        <span className="badge badge-success text-sm px-3 py-1.5">
+                                            Fully Acquired
+                                        </span>
+                                    ) : result.earnedCredits > 0 ? (
+                                        <span className="badge badge-warning text-sm px-3 py-1.5">
+                                            Partially Acquired
+                                        </span>
+                                    ) : (
+                                        <span className="badge badge-danger text-sm px-3 py-1.5">
+                                            None Acquired
+                                        </span>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="mt-4 flex items-start gap-2 text-xs text-surface-400 dark:text-surface-500">
+                            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                            <span>
+                                {result.average != null && result.average >= 10 
+                                    ? "Passed by compensation: All 30 credits acquired."
+                                    : "Acquire credits by scoring >= 10.00 in individual modules."
+                                }
+                            </span>
+                        </div>
                     </div>
                 )}
             </div>
