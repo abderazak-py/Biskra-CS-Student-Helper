@@ -1,8 +1,15 @@
 import { useState, useMemo } from 'react'
 import { Users, Mail, Search, Copy, Check } from 'lucide-react'
 import { TEACHERS } from '../data/teachers'
+import useSEO from '../hooks/useSEO'
 
 export default function TeachersPage() {
+    useSEO({
+        title: 'Teachers Directory',
+        description: 'Find contact details, email addresses, and office hours for Computer Science department teachers at the University of Biskra.',
+        canonicalPath: '/teachers'
+    })
+
     const [search, setSearch] = useState('')
     const [copiedEmail, setCopiedEmail] = useState(null)
 

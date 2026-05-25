@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Timer, Play, Pause, RotateCcw, Target } from 'lucide-react'
+import useSEO from '../hooks/useSEO'
 
 const PRESETS = {
     pomodoro: { minutes: 25, label: 'Focus' },
@@ -8,6 +9,12 @@ const PRESETS = {
 }
 
 export default function PomodoroPage() {
+    useSEO({
+        title: 'Pomodoro Focus Timer',
+        description: 'Improve your study productivity and focus with our interactive Pomodoro timer. Manage your sessions and track your study time.',
+        canonicalPath: '/pomodoro'
+    })
+
     const [mode, setMode] = useState('pomodoro')
     const [timeLeft, setTimeLeft] = useState(PRESETS.pomodoro.minutes * 60)
     const [isRunning, setIsRunning] = useState(false)

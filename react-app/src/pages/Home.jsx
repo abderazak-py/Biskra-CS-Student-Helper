@@ -8,6 +8,7 @@ import {
     Users,
     ChevronRight,
 } from 'lucide-react'
+import useSEO from '../hooks/useSEO'
 
 // Primary action - most used tool
 const primaryAction = {
@@ -47,6 +48,12 @@ const otherTools = [
 
 
 export default function Home() {
+    useSEO({
+        title: '',
+        description: 'A comprehensive and offline-ready CS Student Helper PWA for Biskra University. Calculate semester GPAs, track study time, access learning resources, and practice with CS quizzes.',
+        canonicalPath: '/'
+    })
+
     return (
         <div className="max-w-4xl mx-auto space-y-8">
             {/* Header - Simple, direct */}

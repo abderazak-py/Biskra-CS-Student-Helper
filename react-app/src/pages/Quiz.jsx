@@ -1,8 +1,15 @@
 import { useState } from 'react'
 import { Brain, Check, X, RotateCcw, Trophy, ArrowRight, Play } from 'lucide-react'
 import { QUIZ_QUESTIONS, shuffleArray } from '../data/quiz'
+import useSEO from '../hooks/useSEO'
 
 export default function QuizPage() {
+    useSEO({
+        title: 'Computer Science Quiz',
+        description: 'Test your computer science knowledge with interactive quizzes. Practice questions on programming, algorithms, networks, databases, and more.',
+        canonicalPath: '/quiz'
+    })
+
     const [gameState, setGameState] = useState('idle') // idle, playing, finished
     const [questions, setQuestions] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0)

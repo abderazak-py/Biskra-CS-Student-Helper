@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { Calculator, RefreshCw, Award, AlertCircle } from 'lucide-react'
 import { MODULES, SEMESTERS } from '../data/modules'
+import useSEO from '../hooks/useSEO'
 
 const STORAGE_KEY = 'calculator_grades'
 
@@ -37,6 +38,12 @@ function getModuleGrade(module, avg) {
 }
 
 export default function CalculatorPage() {
+    useSEO({
+        title: 'Semester GPA Calculator',
+        description: 'Calculate your semester GPA (Grade Point Average) for University of Biskra. Supports both LMD and classic academic systems.',
+        canonicalPath: '/calculator'
+    })
+
     const [semester, setSemester] = useState(() => {
         const saved = localStorage.getItem(STORAGE_KEY)
         return saved ? Object.keys(JSON.parse(saved))[0] || 's1' : 's1'

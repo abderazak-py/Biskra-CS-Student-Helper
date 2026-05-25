@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Moon, Sun, Star, Check, RotateCcw } from 'lucide-react'
 import { ADKAR_MORNING, ADKAR_EVENING, ADKAR_GENERAL } from '../data/adkar'
+import useSEO from '../hooks/useSEO'
 
 const STORAGE_KEY = 'adkar_counts'
 
@@ -109,6 +110,12 @@ function DikrCard({ dikr, index, count, onIncrement, onReset }) {
 }
 
 export default function AdkarPage() {
+    useSEO({
+        title: 'Adkar & Supplications',
+        description: 'Read and count morning, evening, and general supplications (Adkar) with our interactive digital counter.',
+        canonicalPath: '/adkar'
+    })
+
     const [category, setCategory] = useState('morning')
     const [savedData, setSavedData] = useState(() => loadCounts())
     const currentCategory = CATEGORIES.find((c) => c.key === category)

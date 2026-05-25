@@ -1,4 +1,5 @@
 import { Heart, Github, ExternalLink, Youtube } from 'lucide-react'
+import useSEO from '../hooks/useSEO'
 
 const CONTRIBUTORS = [
     {
@@ -25,6 +26,12 @@ const CONTRIBUTORS = [
 ]
 
 export default function ContributorsPage() {
+    useSEO({
+        title: 'Contributors',
+        description: 'Meet the contributors and students who helped build and maintain the Biskra CS Student Helper application.',
+        canonicalPath: '/contributors'
+    })
+
     return (
         <div className="max-w-2xl mx-auto space-y-6">
             {/* Header */}

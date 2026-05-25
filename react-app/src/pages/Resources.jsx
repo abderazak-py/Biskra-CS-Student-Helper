@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BookOpen, FileText, Code, FileQuestion, ChevronDown, ExternalLink, Search, FolderOpen } from 'lucide-react'
 import { MODULE_RESOURCES, EXTERNAL_RESOURCES } from '../data/resources'
+import useSEO from '../hooks/useSEO'
 
 const SECTION_CONFIG = {
     cours: { label: 'Cours', icon: BookOpen, color: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-100 dark:bg-blue-900/30' },
@@ -97,6 +98,12 @@ function ModuleCard({ moduleKey, module }) {
 }
 
 export default function ResourcesPage() {
+    useSEO({
+        title: 'Learning Resources',
+        description: 'Access academic courses, tutorials, TD/TP sheets, and documentation for Computer Science students at the University of Biskra.',
+        canonicalPath: '/resources'
+    })
+
     const [search, setSearch] = useState('')
 
     const filteredModules = Object.entries(MODULE_RESOURCES).filter(([key, module]) =>
