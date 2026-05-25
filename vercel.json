@@ -3,7 +3,7 @@
     "outputDirectory": "react-app/dist",
     "rewrites": [
         {
-            "source": "/(.*)",
+            "source": "/((?!assets/|robots\\.txt|sitemap\\.xml|manifest\\.webmanifest|sw\\.js|icon\\.png|workbox-.*\\.js).*)",
             "destination": "/index.html"
         }
     ],
