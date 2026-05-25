@@ -69,9 +69,9 @@ export default function Layout() {
                                 <GraduationCap className="w-5 h-5 text-white" />
                             </div>
                             <div>
-                                <h1 className="font-semibold text-surface-900 dark:text-surface-100">
+                                <span className="font-semibold text-surface-900 dark:text-surface-100 block">
                                     CS Helper
-                                </h1>
+                                </span>
                                 <p className="text-xs text-surface-500 dark:text-surface-400">
                                     Biskra University
                                 </p>
