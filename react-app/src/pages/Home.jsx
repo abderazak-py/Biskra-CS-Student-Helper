@@ -50,7 +50,7 @@ const otherTools = [
 export default function Home() {
     useSEO({
         title: '',
-        description: 'A comprehensive and offline-ready CS Student Helper PWA for Biskra University. Calculate semester GPAs, track study time, access learning resources, and practice with CS quizzes.',
+        description: 'A comprehensive, offline-ready academic toolkit for Computer Science students at Biskra University. Features include semester GPA calculation, study time tracking, academic resources, and quizzes.',
         canonicalPath: '/'
     })
 
@@ -58,12 +58,13 @@ export default function Home() {
         <div className="max-w-4xl mx-auto space-y-8">
             {/* Header - Simple, direct */}
             <header className="pt-4">
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-4 mb-6">
+                    <img src="/icon.png" alt="CS Helper Logo" className="w-12 h-12 rounded-xl object-contain shadow-sm" />
                     <div>
                         <h1 className="text-2xl font-bold text-surface-900 dark:text-surface-100">
                             CS Student Helper
                         </h1>
-                        <p className="text-surface-500 dark:text-surface-400 mt-1">
+                        <p className="text-surface-500 dark:text-surface-400 mt-0.5 text-sm">
                             University of Biskra
                         </p>
                     </div>

@@ -1,7 +1,7 @@
 {
-    "name": "CS Student Helper - Biskra University",
+    "name": "CS Student Helper",
     "short_name": "CS Helper",
-    "description": "A modern student helper app for CS students at Biskra University",
+    "description": "A comprehensive, offline-ready academic toolkit for Computer Science students at Biskra University. Features include semester GPA calculation, study time tracking, academic resources, and quizzes.",
     "theme_color": "#0c1222",
     "background_color": "#0c1222",
     "display": "standalone",

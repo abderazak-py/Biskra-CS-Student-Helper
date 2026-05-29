@@ -9,7 +9,7 @@ export default function useSEO({ title, description, canonicalPath }) {
         if (title) {
             document.title = `${title} | CS Student Helper`
         } else {
-            document.title = 'CS Student Helper - Biskra University Academic Toolkit'
+            document.title = 'CS Student Helper - Biskra CS Student Helper'
         }
 
         // 2. Update Meta Description
@@ -19,7 +19,7 @@ export default function useSEO({ title, description, canonicalPath }) {
             descMeta.setAttribute('name', 'description')
             document.head.appendChild(descMeta)
         }
-        const defaultDesc = 'A comprehensive and offline-ready CS Student Helper PWA for Biskra University. Calculate semester GPAs, track study time, access learning resources, and practice with CS quizzes.'
+        const defaultDesc = 'A comprehensive, offline-ready academic toolkit for Computer Science students at Biskra University. Features include semester GPA calculation, study time tracking, academic resources, and quizzes.'
         descMeta.setAttribute('content', description || defaultDesc)
 
         // 3. Update Canonical Link
@@ -45,9 +45,10 @@ export default function useSEO({ title, description, canonicalPath }) {
             tag.setAttribute('content', content)
         }
 
-        updateOgTag('og:title', title ? `${title} | CS Student Helper` : 'CS Student Helper - Biskra University Academic Toolkit')
+        updateOgTag('og:title', title ? `${title} | CS Student Helper` : 'CS Student Helper - Biskra CS Student Helper')
         updateOgTag('og:description', description || defaultDesc)
         updateOgTag('og:url', absoluteUrl)
+        updateOgTag('og:site_name', 'Biskra CS Student Helper')
 
         // 5. Update Twitter Card Meta Tags
         const updateTwitterTag = (name, content) => {
@@ -60,7 +61,7 @@ export default function useSEO({ title, description, canonicalPath }) {
             tag.setAttribute('content', content)
         }
 
-        updateTwitterTag('twitter:title', title ? `${title} | CS Student Helper` : 'CS Student Helper - Biskra University Academic Toolkit')
+        updateTwitterTag('twitter:title', title ? `${title} | CS Student Helper` : 'CS Student Helper - Biskra CS Student Helper')
         updateTwitterTag('twitter:description', description || defaultDesc)
         updateTwitterTag('twitter:url', absoluteUrl)
 

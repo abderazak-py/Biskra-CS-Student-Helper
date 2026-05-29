@@ -10,7 +10,6 @@ import {
     Users,
     Menu,
     X,
-    GraduationCap,
     Github,
     Heart,
     Download,
@@ -65,9 +64,7 @@ export default function Layout() {
                     {/* Logo */}
                     <div className="p-5 border-b border-surface-200 dark:border-surface-800">
                         <Link to="/" className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-lg bg-primary-700 flex items-center justify-center">
-                                <GraduationCap className="w-5 h-5 text-white" />
-                            </div>
+                            <img src="/icon.png" alt="CS Helper Logo" className="w-9 h-9 rounded-lg object-contain" />
                             <div>
                                 <span className="font-semibold text-surface-900 dark:text-surface-100 block">
                                     CS Helper
