@@ -9,7 +9,7 @@ export default defineConfig({
             registerType: 'autoUpdate',
             includeAssets: ['icon.png'],
             additionalManifestEntries: [
-                { url: '/', revision: 'v1.1.1' }
+                { url: '/', revision: 'v1.1.2' }
             ],
             filename: 'sw.js',
             scope: '/',

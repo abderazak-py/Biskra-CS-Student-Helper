@@ -410,13 +410,13 @@ export default function CalculatorPage() {
                                             className="p-3 rounded-lg bg-surface-50 dark:bg-surface-800/30 border border-surface-200/60 dark:border-surface-700/40"
                                         >
                                             {/* Mobile Module Info */}
-                                            <div className="flex justify-between items-center sm:hidden mb-3">
-                                                <div className="flex items-center gap-2">
-                                                    <span className="font-medium text-surface-900 dark:text-surface-100 text-sm truncate">
+                                            <div className="flex flex-col gap-1 sm:hidden mb-3">
+                                                <div className="flex items-start gap-2">
+                                                    <span className="font-medium text-surface-900 dark:text-surface-100 text-xs whitespace-normal break-words line-clamp-2">
                                                         {module.name}
                                                     </span>
                                                     {module.optional && (
-                                                        <span className="badge badge-primary text-2xs">Optional</span>
+                                                        <span className="badge badge-primary text-2xs flex-shrink-0 mt-0.5">Optional</span>
                                                     )}
                                                 </div>
                                                 <span className="text-xs text-surface-400 dark:text-surface-500">
@@ -427,12 +427,12 @@ export default function CalculatorPage() {
                                             <div className="sm:flex sm:flex-row sm:items-center sm:gap-3">
                                                 {/* Desktop Module Info */}
                                                 <div className="hidden sm:flex-shrink-0 sm:min-w-0 sm:flex-1 sm:flex sm:flex-col">
-                                                    <div className="flex items-center gap-2">
-                                                        <span className="font-medium text-surface-900 dark:text-surface-100 text-sm truncate">
+                                                    <div className="flex items-start gap-2">
+                                                        <span className="font-medium text-surface-900 dark:text-surface-100 text-xs sm:text-sm whitespace-normal break-words line-clamp-2">
                                                             {module.name}
                                                         </span>
                                                         {module.optional && (
-                                                            <span className="badge badge-primary text-2xs">Optional</span>
+                                                            <span className="badge badge-primary text-2xs flex-shrink-0 mt-0.5">Optional</span>
                                                         )}
                                                     </div>
                                                     <span className="text-xs text-surface-400 dark:text-surface-500">
