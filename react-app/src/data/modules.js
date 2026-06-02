@@ -33,8 +33,8 @@ export const MODULES = {
     ],
     s4: [
         { key: "os", name: "Systèmes d'exploitation 1", hasTP: true, coef: 3, credit: 5, unit: "UEF1" },
-        { key: "tl", name: "Théorie des langages", hasTP: true, coef: 2, credit: 4, unit: "UEF2" },
-        { key: "rc", name: "Réseaux de communication", hasTP: true, coef: 3, credit: 6, unit: "UEF1" },
+        { key: "tl", name: "Théorie des langages", hasTP: true, coef: 2, credit: 5, unit: "UEF1" },
+        { key: "rc", name: "Réseaux de communication", hasTP: true, coef: 3, credit: 5, unit: "UEF2" },
         { key: "bd", name: "Bases de données", hasTP: true, coef: 3, credit: 5, unit: "UEF2" },
         { key: "eng", name: "Anglais 4", single: true, coef: 1, credit: 2, unit: "UET" },
         { key: "poo", name: "Programmation orientée objet", tpOnly: true, coef: 2, credit: 4, unit: "UEM" },
