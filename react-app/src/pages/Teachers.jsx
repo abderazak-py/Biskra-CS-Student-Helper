@@ -57,6 +57,7 @@ export default function TeachersPage() {
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search by name or email..."
                     className="input pl-10"
+                    aria-label="Search by name or email"
                 />
             </div>
 
@@ -92,6 +93,7 @@ export default function TeachersPage() {
                             {/* Actions */}
                             <div className="flex items-center gap-0.5 flex-shrink-0">
                                 <button
+                                    type="button"
                                     onClick={() => copyEmail(teacher.email, teacher.name)}
                                     className="p-2 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-400 hover:text-surface-600 dark:hover:text-surface-200 transition-colors"
                                     title="Copy email"

@@ -15,10 +15,14 @@ const updateSW = registerSW({
         }
     },
     onOfflineReady() {
-        console.log('App ready to work offline')
+        if (import.meta.env.DEV) {
+            console.log('App ready to work offline')
+        }
     },
     onRegistered(registration) {
-        console.log('Service Worker registered')
+        if (import.meta.env.DEV) {
+            console.log('Service Worker registered')
+        }
         // Check for updates periodically
         if (registration) {
             setInterval(() => {
@@ -27,7 +31,9 @@ const updateSW = registerSW({
         }
     },
     onRegisterError(error) {
-        console.error('Service Worker registration error:', error)
+        if (import.meta.env.DEV) {
+            console.error('Service Worker registration error:', error)
+        }
     }
 })
 

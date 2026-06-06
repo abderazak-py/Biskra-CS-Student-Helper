@@ -2,15 +2,14 @@ import { useState, useEffect } from 'react'
 
 export function usePWAInstall() {
     const [installPrompt, setInstallPrompt] = useState(null)
-    const [isInstalled, setIsInstalled] = useState(false)
+    const [isInstalled, setIsInstalled] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return window.matchMedia('(display-mode: standalone)').matches
+        }
+        return false
+    })
 
     useEffect(() => {
-        // Check if already installed
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            setIsInstalled(true)
-            return
-        }
-
         // Listen for the beforeinstallprompt event
         const handleBeforeInstallPrompt = (e) => {
             e.preventDefault()

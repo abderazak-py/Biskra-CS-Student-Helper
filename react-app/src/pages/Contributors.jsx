@@ -52,12 +52,9 @@ export default function ContributorsPage() {
             {/* Contributors List */}
             <div className="space-y-2">
                 {CONTRIBUTORS.map((contributor) => (
-                    <a
+                    <div
                         key={contributor.name}
-                        href={contributor.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="card p-4 flex items-center justify-between hover:border-primary-300 dark:hover:border-primary-700 transition-colors"
+                        className="card p-4 flex items-center justify-between hover:border-primary-300 dark:hover:border-primary-700 transition-colors relative"
                     >
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
@@ -78,14 +75,13 @@ export default function ContributorsPage() {
                                 </p>
                             </div>
                         </div>
-                        <div className="flex items-center gap-2 text-surface-400">
+                        <div className="flex items-center gap-2 text-surface-400 relative z-10">
                             {contributor.youtube && (
                                 <a
                                     href={contributor.youtube}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    onClick={(e) => e.stopPropagation()}
-                                    className="hover:text-red-500 transition-colors"
+                                    className="hover:text-red-500 transition-colors relative z-20"
                                 >
                                     <Youtube className="w-4 h-4" />
                                 </a>
@@ -93,7 +89,14 @@ export default function ContributorsPage() {
                             <Github className="w-4 h-4" />
                             <ExternalLink className="w-3.5 h-3.5" />
                         </div>
-                    </a>
+                        <a
+                            href={contributor.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="absolute inset-0 z-0"
+                            aria-label={`Visit ${contributor.name}'s GitHub profile`}
+                        />
+                    </div>
                 ))}
             </div>
 

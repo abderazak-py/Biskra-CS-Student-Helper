@@ -17,20 +17,22 @@ This document serves as the persistent memory and developer handbook for the **B
 
 ## 🚀 Key Commands
 
-Always run these commands from the `react-app` subdirectory:
+You can run these commands directly from the **root directory** of the project:
 
 *   **Start Local Development**:
     ```bash
-    cd react-app && npm run dev
+    npm run dev
     ```
 *   **Build for Production**:
     ```bash
-    cd react-app && npm run build
+    npm run build
     ```
 *   **Preview Production Build**:
     ```bash
-    cd react-app && npm run preview
+    npm run preview
     ```
+
+*(Note: They still work from the `react-app` subdirectory via `npm run dev`, etc. if you prefer).*
 
 ---
 

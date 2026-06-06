@@ -1,7 +1,56 @@
-import { useState } from 'react'
+import { useReducer, useRef } from 'react'
 import { Brain, Check, X, RotateCcw, Trophy, ArrowRight, Play } from 'lucide-react'
 import { QUIZ_QUESTIONS, shuffleArray } from '../data/quiz'
 import useSEO from '../hooks/useSEO'
+
+const initialState = {
+    gameState: 'idle', // idle, playing, finished
+    questions: [],
+    currentIndex: 0,
+    selectedAnswer: null,
+    showResult: false,
+    score: 0,
+}
+
+function quizReducer(state, action) {
+    switch (action.type) {
+        case 'START_QUIZ':
+            return {
+                ...state,
+                gameState: 'playing',
+                questions: action.payload,
+                currentIndex: 0,
+                selectedAnswer: null,
+                showResult: false,
+                score: 0,
+            }
+        case 'ANSWER_QUESTION': {
+            const { index, isCorrect } = action.payload
+            return {
+                ...state,
+                selectedAnswer: index,
+                showResult: true,
+                score: isCorrect ? state.score + 1 : state.score,
+            }
+        }
+        case 'NEXT_QUESTION':
+            if (state.currentIndex < state.questions.length - 1) {
+                return {
+                    ...state,
+                    currentIndex: state.currentIndex + 1,
+                    selectedAnswer: null,
+                    showResult: false,
+                }
+            } else {
+                return {
+                    ...state,
+                    gameState: 'finished',
+                }
+            }
+        default:
+            return state
+    }
+}
 
 export default function QuizPage() {
     useSEO({
@@ -10,46 +59,27 @@ export default function QuizPage() {
         canonicalPath: '/quiz'
     })
 
-    const [gameState, setGameState] = useState('idle') // idle, playing, finished
-    const [questions, setQuestions] = useState([])
-    const [currentIndex, setCurrentIndex] = useState(0)
-    const [selectedAnswer, setSelectedAnswer] = useState(null)
-    const [showResult, setShowResult] = useState(false)
-    const [score, setScore] = useState(0)
-    const [answers, setAnswers] = useState([])
+    const [state, dispatch] = useReducer(quizReducer, initialState)
+    const { gameState, questions, currentIndex, selectedAnswer, showResult, score } = state
+    const answersRef = useRef([])
 
     const startQuiz = () => {
         const shuffled = shuffleArray(QUIZ_QUESTIONS).slice(0, 10)
-        setQuestions(shuffled)
-        setCurrentIndex(0)
-        setScore(0)
-        setAnswers([])
-        setSelectedAnswer(null)
-        setShowResult(false)
-        setGameState('playing')
+        dispatch({ type: 'START_QUIZ', payload: shuffled })
+        answersRef.current = []
     }
 
     const handleAnswer = (index) => {
         if (showResult) return
 
-        setSelectedAnswer(index)
-        setShowResult(true)
-
         const isCorrect = index === questions[currentIndex].answer
-        if (isCorrect) {
-            setScore((prev) => prev + 1)
-        }
-        setAnswers((prev) => [...prev, { questionIndex: currentIndex, selected: index, isCorrect }])
+        dispatch({ type: 'ANSWER_QUESTION', payload: { index, isCorrect } })
+
+        answersRef.current.push({ questionIndex: currentIndex, selected: index, isCorrect })
     }
 
     const nextQuestion = () => {
-        if (currentIndex < questions.length - 1) {
-            setCurrentIndex((prev) => prev + 1)
-            setSelectedAnswer(null)
-            setShowResult(false)
-        } else {
-            setGameState('finished')
-        }
+        dispatch({ type: 'NEXT_QUESTION' })
     }
 
     const currentQuestion = questions[currentIndex]
@@ -99,7 +129,7 @@ export default function QuizPage() {
                             <span className="text-surface-500 dark:text-surface-400 ml-1">choice</span>
                         </div>
                     </div>
-                    <button onClick={startQuiz} className="btn btn-primary">
+                    <button type="button" onClick={startQuiz} className="btn btn-primary">
                         <Play className="w-4 h-4" />
                         Start Quiz
                     </button>
@@ -149,7 +179,8 @@ export default function QuizPage() {
 
                                 return (
                                     <button
-                                        key={index}
+                                        type="button"
+                                        key={option}
                                         onClick={() => handleAnswer(index)}
                                         disabled={showResult}
                                         className={`
@@ -205,7 +236,7 @@ export default function QuizPage() {
 
                         {/* Next Button */}
                         {showResult && (
-                            <button onClick={nextQuestion} className="btn btn-primary w-full mt-4">
+                            <button type="button" onClick={nextQuestion} className="btn btn-primary w-full mt-4">
                                 {currentIndex < questions.length - 1 ? (
                                     <>
                                         Next Question
@@ -253,7 +284,7 @@ export default function QuizPage() {
                         </div>
                     </div>
 
-                    <button onClick={startQuiz} className="btn btn-primary">
+                    <button type="button" onClick={startQuiz} className="btn btn-primary">
                         <RotateCcw className="w-4 h-4" />
                         Play Again
                     </button>

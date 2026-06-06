@@ -45,8 +45,10 @@ export default function Layout() {
         <div className="min-h-screen flex bg-surface-50 dark:bg-surface-950">
             {/* Mobile overlay */}
             {sidebarOpen && (
-                <div
-                    className="fixed inset-0 bg-surface-900/20 dark:bg-surface-950/50 z-40 lg:hidden"
+                <button
+                    type="button"
+                    aria-label="Close sidebar"
+                    className="fixed inset-0 bg-surface-900/20 dark:bg-surface-950/50 z-40 lg:hidden cursor-default focus:outline-none"
                     onClick={() => setSidebarOpen(false)}
                 />
             )}
@@ -144,6 +146,7 @@ export default function Layout() {
                     <div className="flex items-center justify-between px-4 lg:px-6 py-3">
                         <div className="flex items-center gap-3">
                             <button
+                                type="button"
                                 onClick={() => setSidebarOpen(true)}
                                 className="lg:hidden p-2 -ml-2 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 dark:text-surface-400 transition-colors"
                             >
@@ -157,6 +160,7 @@ export default function Layout() {
                         {/* Install PWA button */}
                         {canInstall && (
                             <button
+                                type="button"
                                 onClick={install}
                                 className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium transition-colors"
                             >
@@ -168,6 +172,7 @@ export default function Layout() {
                         {/* Close button for mobile */}
                         {sidebarOpen && (
                             <button
+                                type="button"
                                 onClick={() => setSidebarOpen(false)}
                                 className="lg:hidden p-2 -mr-2 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-500 dark:text-surface-400 transition-colors"
                             >

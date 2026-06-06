@@ -34,6 +34,7 @@ function SectionAccordion({ type, resources }) {
     return (
         <div className="border border-surface-200 dark:border-surface-700 rounded-lg overflow-hidden">
             <button
+                type="button"
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-full flex items-center justify-between p-3 hover:bg-surface-50 dark:hover:bg-surface-800 transition-colors"
             >
@@ -48,8 +49,8 @@ function SectionAccordion({ type, resources }) {
             </button>
             {isOpen && (
                 <div className="p-3 pt-0 grid gap-1.5">
-                    {resources.map((resource, index) => (
-                        <ResourceLink key={index} title={resource.title} url={resource.url} />
+                    {resources.map((resource) => (
+                        <ResourceLink key={resource.url} title={resource.title} url={resource.url} />
                     ))}
                 </div>
             )}
@@ -67,6 +68,7 @@ function ModuleCard({ moduleKey, module }) {
     return (
         <div className="card overflow-hidden">
             <button
+                type="button"
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-full flex items-center justify-between p-4"
             >
@@ -136,6 +138,7 @@ export default function ResourcesPage() {
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search modules..."
                     className="input pl-10"
+                    aria-label="Search modules"
                 />
             </div>
 
@@ -157,9 +160,9 @@ export default function ResourcesPage() {
             <div className="card p-4">
                 <h2 className="section-label mb-3">External Learning Resources</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {EXTERNAL_RESOURCES.map((resource, index) => (
+                    {EXTERNAL_RESOURCES.map((resource) => (
                         <a
-                            key={index}
+                            key={resource.url}
                             href={resource.url}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -170,8 +173,8 @@ export default function ResourcesPage() {
                                 <h3 className="font-medium text-surface-900 dark:text-surface-100 text-sm">{resource.title}</h3>
                                 <p className="text-xs text-surface-500 dark:text-surface-400 mt-0.5">{resource.desc}</p>
                                 <div className="flex gap-1.5 mt-2">
-                                    {resource.tags.map((tag, i) => (
-                                        <span key={i} className="badge text-2xs bg-surface-100 dark:bg-surface-700 text-surface-600 dark:text-surface-300">{tag}</span>
+                                    {resource.tags.map((tag) => (
+                                        <span key={tag} className="badge text-2xs bg-surface-100 dark:bg-surface-700 text-surface-600 dark:text-surface-300">{tag}</span>
                                     ))}
                                 </div>
                             </div>

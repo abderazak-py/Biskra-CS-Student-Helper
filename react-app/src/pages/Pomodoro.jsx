@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Timer, Play, Pause, RotateCcw, Target } from 'lucide-react'
 import useSEO from '../hooks/useSEO'
 
@@ -6,6 +6,12 @@ const PRESETS = {
     pomodoro: { minutes: 25, label: 'Focus' },
     shortBreak: { minutes: 5, label: 'Short Break' },
     longBreak: { minutes: 15, label: 'Long Break' },
+}
+
+const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
 }
 
 export default function PomodoroPage() {
@@ -25,19 +31,7 @@ export default function PomodoroPage() {
     const totalTime = currentPreset.minutes * 60
     const progress = ((totalTime - timeLeft) / totalTime) * 100
 
-    useEffect(() => {
-        if (isRunning && timeLeft > 0) {
-            intervalRef.current = setInterval(() => {
-                setTimeLeft((prev) => prev - 1)
-            }, 1000)
-        } else if (timeLeft === 0) {
-            handleComplete()
-        }
-
-        return () => clearInterval(intervalRef.current)
-    }, [isRunning, timeLeft])
-
-    const handleComplete = () => {
+    const handleComplete = useCallback(() => {
         setIsRunning(false)
         if (mode === 'pomodoro') {
             setSessions((prev) => prev + 1)
@@ -48,7 +42,19 @@ export default function PomodoroPage() {
             )
             audio.play().catch(() => { })
         } catch (e) { }
-    }
+    }, [mode])
+
+    useEffect(() => {
+        if (isRunning && timeLeft > 0) {
+            intervalRef.current = setInterval(() => {
+                setTimeLeft((prev) => prev - 1)
+            }, 1000)
+        } else if (timeLeft === 0) {
+            handleComplete()
+        }
+
+        return () => clearInterval(intervalRef.current)
+    }, [isRunning, timeLeft, handleComplete])
 
     const toggleTimer = () => {
         setIsRunning((prev) => !prev)
@@ -63,12 +69,6 @@ export default function PomodoroPage() {
         setIsRunning(false)
         setMode(newMode)
         setTimeLeft(PRESETS[newMode].minutes * 60)
-    }
-
-    const formatTime = (seconds) => {
-        const mins = Math.floor(seconds / 60)
-        const secs = seconds % 60
-        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
     }
 
     return (
@@ -92,6 +92,7 @@ export default function PomodoroPage() {
             <div className="flex gap-2">
                 {Object.entries(PRESETS).map(([key, preset]) => (
                     <button
+                        type="button"
                         key={key}
                         onClick={() => changeMode(key)}
                         className={`
@@ -152,6 +153,7 @@ export default function PomodoroPage() {
                 {/* Controls */}
                 <div className="flex items-center justify-center gap-4 mt-6">
                     <button
+                        type="button"
                         onClick={resetTimer}
                         className="p-3 rounded-lg bg-surface-100 dark:bg-surface-800 hover:bg-surface-200 dark:hover:bg-surface-700 transition-colors"
                     >
@@ -159,6 +161,7 @@ export default function PomodoroPage() {
                     </button>
 
                     <button
+                        type="button"
                         onClick={toggleTimer}
                         className={`
                             p-5 rounded-xl transition-all

@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-06T12:06:50.472Z",
+  "uniqueIssues": 0,
+  "totalOccurrences": 0,
+  "bySeverity": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0
+  },
+  "byType": [],
+  "issues": []
+}

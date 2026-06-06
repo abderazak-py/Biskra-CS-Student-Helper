@@ -41,6 +41,13 @@ function DikrCard({ dikr, index, count, onIncrement, onReset }) {
         }
     }
 
+    const handleKeyDown = (e) => {
+        if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault()
+            handleTap()
+        }
+    }
+
     const handleReset = (e) => {
         e.stopPropagation()
         onReset(index)
@@ -49,62 +56,71 @@ function DikrCard({ dikr, index, count, onIncrement, onReset }) {
     const progress = (count / dikr.count) * 100
 
     return (
-        <div
-            onClick={handleTap}
-            className={`
-                card p-4 cursor-pointer select-none transition-all
-                ${isComplete ? 'bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-700' : ''}
-            `}
-        >
-            {/* Arabic Text */}
-            <p
-                className="text-lg leading-relaxed text-surface-900 dark:text-surface-100 text-right mb-3"
-                dir="rtl"
-                style={{ fontFamily: 'Amiri, serif' }}
+        <div className="relative">
+            <button
+                type="button"
+                onClick={handleTap}
+                onKeyDown={handleKeyDown}
+                className={`
+                    w-full text-left card p-4 cursor-pointer select-none transition-all focus:outline-none focus:ring-2 focus:ring-primary-500
+                    ${isComplete ? 'bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-700' : ''}
+                `}
             >
-                {dikr.text}
-            </p>
+                {/* Arabic Text */}
+                <p
+                    className="text-lg leading-relaxed text-surface-900 dark:text-surface-100 text-right mb-3 w-full"
+                    dir="rtl"
+                    style={{ fontFamily: 'Amiri, serif' }}
+                >
+                    {dikr.text}
+                </p>
 
-            {/* Progress and Counter */}
-            <div className="flex items-center justify-between gap-3">
-                {/* Counter */}
-                <div className="flex items-center gap-2">
-                    <div
-                        className={`
-                        flex items-center gap-2 px-3 py-1.5 rounded-lg
-                        ${isComplete
-                                ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
-                                : 'bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400'
-                            }
-                    `}
-                    >
-                        {isComplete ? (
-                            <Check className="w-4 h-4" />
-                        ) : (
-                            <span className="text-xs font-medium">{dikr.count}×</span>
-                        )}
-                        <span className="font-bold">{count}</span>
+                {/* Progress and Counter */}
+                <div className="flex items-center justify-between gap-3 w-full">
+                    {/* Counter container spacing placeholder */}
+                    <div className="flex items-center gap-2">
+                        <div
+                            className={`
+                            flex items-center gap-2 px-3 py-1.5 rounded-lg
+                            ${isComplete
+                                    ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+                                    : 'bg-surface-100 dark:bg-surface-800 text-surface-600 dark:text-surface-400'
+                                }
+                        `}
+                        >
+                            {isComplete ? (
+                                <Check className="w-4 h-4" />
+                            ) : (
+                                <span className="text-xs font-medium">{dikr.count}×</span>
+                            )}
+                            <span className="font-bold">{count}</span>
+                        </div>
+
+                        {/* Spacer for reset button when it appears */}
+                        {count > 0 && <div className="w-7 h-7" />}
                     </div>
 
-                    {/* Reset button */}
-                    {count > 0 && (
-                        <button
-                            onClick={handleReset}
-                            className="p-1.5 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-400 hover:text-surface-600 dark:hover:text-surface-200 transition-colors"
-                        >
-                            <RotateCcw className="w-3.5 h-3.5" />
-                        </button>
-                    )}
+                    {/* Progress bar */}
+                    <div className="flex-1 h-1.5 bg-surface-200 dark:bg-surface-700 rounded-full overflow-hidden">
+                        <div
+                            className={`h-full rounded-full transition-all duration-300 ${isComplete ? 'bg-green-500' : 'bg-primary-500'}`}
+                            style={{ width: `${progress}%` }}
+                        />
+                    </div>
                 </div>
+            </button>
 
-                {/* Progress bar */}
-                <div className="flex-1 h-1.5 bg-surface-200 dark:bg-surface-700 rounded-full overflow-hidden">
-                    <div
-                        className={`h-full rounded-full transition-all duration-300 ${isComplete ? 'bg-green-500' : 'bg-primary-500'}`}
-                        style={{ width: `${progress}%` }}
-                    />
-                </div>
-            </div>
+            {/* Reset button as sibling */}
+            {count > 0 && (
+                <button
+                    type="button"
+                    onClick={handleReset}
+                    className="absolute bottom-5 left-16 p-1 rounded-lg hover:bg-surface-100 dark:hover:bg-surface-800 text-surface-400 hover:text-surface-600 dark:hover:text-surface-200 transition-colors z-10"
+                    title="Reset count"
+                >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                </button>
+            )}
         </div>
     )
 }
@@ -176,6 +192,7 @@ export default function AdkarPage() {
                     const Icon = cat.icon
                     return (
                         <button
+                            type="button"
                             key={cat.key}
                             onClick={() => setCategory(cat.key)}
                             className={`
@@ -197,7 +214,7 @@ export default function AdkarPage() {
             <div className="space-y-2">
                 {currentCategory.data.map((dikr, index) => (
                     <DikrCard
-                        key={index}
+                        key={dikr.text}
                         dikr={dikr}
                         index={index}
                         count={getCount(index)}

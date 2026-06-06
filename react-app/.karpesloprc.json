@@ -1,0 +1,7 @@
+{
+  "ignorePaths": [
+    "tailwind.config.js",
+    "vite.config.js",
+    "postcss.config.js"
+  ]
+}

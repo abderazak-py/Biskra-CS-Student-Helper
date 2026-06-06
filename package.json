@@ -1,0 +1,12 @@
+{
+  "name": "biskra-cs-student-helper",
+  "version": "0.0.3",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix react-app run dev",
+    "build": "npm --prefix react-app run build",
+    "preview": "npm --prefix react-app run preview",
+    "doctor": "npm --prefix react-app run doctor",
+    "postinstall": "npm install --prefix react-app"
+  }
+}
